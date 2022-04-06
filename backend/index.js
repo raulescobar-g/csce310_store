@@ -14,7 +14,7 @@ const pool = new Pool({
 })
 
 if (process.env.NODE_ENV === 'development') { require('dotenv').config(); }
-const port = process.env.NODE_ENV === "development" ? 5000 : process.env.PORT; // heroku sets a PORT to env so dont change this or ask raul
+const port = process.env.NODE_ENV === "development" ? 5000 : process.env.PORT; 
 
 app.use(cors())
 app.use(utils.logger)
@@ -28,5 +28,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Back end listening on port ${port}`)
+  console.log(`Server listening on port ${port}`)
 })
