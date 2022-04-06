@@ -5,6 +5,7 @@ install:
 	npm i --prefix backend
 	
 run:
+	make install
 	@npx concurrently \
 		--names "client, server" \
 		-c "blue,green" \
