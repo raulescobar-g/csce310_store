@@ -7,7 +7,7 @@ const bodyParser = require('body-parser')
 const Pool = require('pg').Pool
 const pool = new Pool({
   user: '',
-  host: '',
+  host: 'database.cqjgso15f4k1.us-east-1.rds.amazonaws.com',
   database: '',
   password: '',
   port: 5432,
