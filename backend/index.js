@@ -23,34 +23,14 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 app.use(express.json())
 
-//ROUTES//
-// USER FEATURE //
-// create user (not working)
-app.post('/users', async(req, res) => {
-  try {
-    const {firstName, lastName, email, password, isAdmin} = req.body
-    const newUser = await pool.query("INSERT INTO users (firstName, lastName, email, password) VALUES ('$1', '$2', '$3' , '$4', '$5') RETURNING *", [firstName, lastName, email, password, isAdmin])
-    res.json(newUser)
-  } catch (error) {
-    console.log(error)
-  }
-})
-
-// get all users (working)
-app.get('/users', async(req, res) => {
-  try {
-    const newUser = await pool.query("SELECT * FROM users")
-    res.json(newUser.rows)
-    //console.log(newUser.rows)
-  } catch (error) {
-    console.log(error)
-  }
-})
-
 app.get('/', (req, res) => {
   res.send({status:200})
 })
 
-app.listen(port, () => {
+//ROUTES//
+const userRouter = require('./routes/users')
+app.use('/users', userRouter)
+
+app.listen(3000, () => {
   console.log(`Server listening on port ${port}`)
 })
