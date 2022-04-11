@@ -1,0 +1,31 @@
+
+div.main {
+    display:flex;
+    flex-direction: row;
+    padding: 5rem;
+    height: 80vh; /* edit */
+}
+
+div.half {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    width:50vw;
+    padding: 5rem;
+    align-self:cetner;
+}
+
+div.form {
+    padding: 5rem;
+    background-color: white;
+    border: 1px solid grey;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);;
+    border-radius: 20px;
+    height: 100%;
+    width: 100%;
+}
+
+p.payment-title {
+    font-weight: 600;
+    font-size: 24px;
+}
