@@ -16,7 +16,7 @@ router.post('/', async(req, res) => {
 // get all users
 router.get('/', async(req, res) => {
     try {
-        const users = await pool.query("SELECT * FROM users")
+        const users = await req.app.get('pool').query("SELECT * FROM users")
         res.json(users.rows)
         //console.log(users.rows)
     } catch (error) {
