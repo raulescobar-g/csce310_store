@@ -93,3 +93,17 @@ code {
   font-size: .875rem;
   color: #6c757d;
 }
+
+.login-label {
+  margin-right: 10px;
+}
+
+.login-text {
+  width: 25%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
