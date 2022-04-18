@@ -14,7 +14,7 @@ router.post('/', async(req, res) => {
 })
   
 // get all users
-router.get('/', async(req, res) => {
+router.get('/getuser/', async(req, res) => {
     try {
         const users = await req.app.get('pool').query("SELECT * FROM users")
         res.json(users.rows)
@@ -25,7 +25,7 @@ router.get('/', async(req, res) => {
 })
   
 // get a user 
-router.get('/:id', async(req, res) => {
+router.get('/getuser/:id', async(req, res) => {
     try {
         const {id} = req.params
         const newUser = await pool.query("SELECT * FROM users WHERE userId=$1", [id])
@@ -37,7 +37,7 @@ router.get('/:id', async(req, res) => {
 })
   
 // update a users password
-router.put('/:id', async(req, res) => {
+router.put('/update/:id', async(req, res) => {
     try {
         const {id} = req.params
         const {newPassword} = req.body
@@ -49,13 +49,22 @@ router.put('/:id', async(req, res) => {
 })
   
 // delete a user 
-router.delete('/:id', async(req, res) => {
+router.delete('/delete/:id', async(req, res) => {
     try {
         const {id} = req.params
         const deleteUser = await pool.query("DELETE FROM users WHERE userID = $1", [id])
         console.log("deleted user")
     } catch (error) {
         console.log(error)
+    }
+})
+
+router.get('/trylogin', async(req, res) => {
+    try {
+        console.log("Attempting to login")
+        
+    } catch (e) {
+        console.log(e)
     }
 })
 
