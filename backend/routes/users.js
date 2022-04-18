@@ -59,10 +59,20 @@ router.delete('/delete/:id', async(req, res) => {
     }
 })
 
-router.get('/trylogin', async(req, res) => {
+router.post('/trylogin', async(req, res) => {
     try {
-        console.log("Attempting to login")
-        
+        const username = req.body.username
+        const password = req.body.password
+        console.log("Attempting to login " + username + " " + password)
+        req.app.get('pool').query("SELECT * FROM users WHERE email=$1 AND password=$1", [username, password], function(results) {
+            if ( results.length > 0 ) {
+                console.log( results.rows )
+                res.redirect("/products")
+            } else {
+                res.send("Incorrect username and/or password")
+            }
+            res.end()
+        });
     } catch (e) {
         console.log(e)
     }
