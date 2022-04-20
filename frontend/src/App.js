@@ -15,6 +15,7 @@ import ProductDetail from "./components/products/detail/ProductDetail";
 import ProductList from "./components/products/ProductList";
 
 import "./App.css";
+import { InventoryManager } from "./views/InventoryManager";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/payment" element={<Payment />} />
           <Route path="/history" element={<History />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/manageinventory" element={<InventoryManager />} />
         </Routes>
       </Template>
     </div>
