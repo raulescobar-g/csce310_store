@@ -64,16 +64,37 @@ router.post('/trylogin', async(req, res) => {
         const username = req.body.username
         const password = req.body.password
         console.log("Attempting to login " + username + " " + password)
-        req.app.get('pool').query("SELECT * FROM users WHERE email=$1 AND password=$1", [username, password], function(results) {
-            if ( results.length > 0 ) {
-                console.log( results.rows )
-                res.redirect("/products")
-            } else {
-                res.send("Incorrect username and/or password")
-            }
-            res.end()
-        });
+
+        const user = await req.app.get('pool').query("SELECT * FROM users WHERE email=$1 AND password=$2", [username, password])
+        console.log( user.rows );
+
+        if ( user.rows.length > 0 ) {
+            console.log( "Logged in user." )
+        }
     } catch (e) {
+        console.log(e)
+    }
+})
+
+router.post('/tryregister', async(req, res) => {
+    try {
+        const fname = req.body.fname
+        const lname = req.body.lname
+        const email = req.body.email
+        const password = req.body.password
+        const isAdmin = false
+
+        console.log( fname + " " + lname + " " + email + " " + password + " " + isAdmin )
+
+        const curUsers = await req.app.get('pool').query("SELECT * FROM users WHERE email=$1", [email])
+        if ( curUsers.rows.length == 0 ) {
+            const newUser = await req.app.get('pool').query("INSERT INTO users (firstname, lastname, email, password, isadmin) VALUES ($1, $2, $3, $4, $5)", [fname, lname, email, password, isAdmin])
+            console.log("Created new user.")
+        } else {
+            console.log("User already exists.")
+        }
+
+    } catch(e) {
         console.log(e)
     }
 })
