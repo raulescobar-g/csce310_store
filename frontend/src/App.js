@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 // import { Landing } from './views/Landing'
 import { Store } from './views/Store'
 import { Login } from './views/Login'
+import { Register } from './views/Register'
 import { Cart } from './views/Cart'
 import { Payment } from './views/Payment'
 import { History } from './views/History'
@@ -27,6 +28,7 @@ function App() {
           <Route path="/store" element={<Store />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/history" element={<History />} />
           <Route path="/account" element={<Account />} />
