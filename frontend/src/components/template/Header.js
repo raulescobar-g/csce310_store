@@ -70,6 +70,11 @@ function Header() {
                       Sign Up
                     </Link>
                   </li>
+                  <li>
+                    <Link to="/manageinventory" className="dropdown-item" onClick={changeNav}>
+                      Manage Inventory
+                    </Link>
+                  </li>
                 </ul>
               </li>
             </ul>
