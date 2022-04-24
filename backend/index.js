@@ -31,6 +31,7 @@ app.get('/', (req, res) => {
 //ROUTES//
 const userRouter = require('./routes/users')
 app.use('/users', userRouter)
+app.use('/products', require('./routes/products'))
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`)
