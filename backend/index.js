@@ -5,15 +5,16 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 
 //ROUTERS//
-const paymentRouter = require('./routes/payment.js')
+const paymentRouter = require('./routes/payments.js')
 const userRouter = require('./routes/users')
 const productRouter = require('./routes/products.js')
 const warehouseRouter = require('./routes/warehouses.js')
+const cartRouter = require('./routes/carts.js')
 
 const Pool = require('pg').Pool
 const pool = new Pool({
   user:         'postgres',
-  host:         'database.cqjgso15f4k1.us-east-1.rds.amazonaws.com',
+  host:         'project',
   database:     'project',
   password:     'csce310group8',
   port:         5432,
@@ -40,17 +41,12 @@ app.get('/', (req, res) => {
 
 
 //ROUTES//
-<<<<<<< HEAD
-const userRouter = require('./routes/users')
-app.use('/users', userRouter)
-app.use('/products', require('./routes/products'))
-=======
 app.use('/users', userRouter);
-app.use('/payment', paymentRouter);
+app.use('/payments', paymentRouter);
 app.use('/products', productRouter);
 app.use('/warehouses',warehouseRouter);
+app.use('/carts', cartRouter)
 
->>>>>>> 77c264ce37318cff4db324fc8f41b29f6b9511f0
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`)
