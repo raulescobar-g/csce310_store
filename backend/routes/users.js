@@ -59,6 +59,10 @@ router.delete('/delete/:id', async(req, res) => {
     }
 })
 
+// Written by Zeeshan V
+
+// Attempts to login the user given an email and password.
+// Queries the database
 router.post('/trylogin', async(req, res) => {
     try {
         const username = req.body.username
@@ -76,6 +80,8 @@ router.post('/trylogin', async(req, res) => {
     }
 })
 
+// Attempts to create a new account for the user
+// Queries and Inserts
 router.post('/tryregister', async(req, res) => {
     try {
         const fname = req.body.fname
