@@ -1,6 +1,8 @@
 const express = require("express")
 const router = express.Router()
+// Written by Zeeshan V
 
+// Returns list of products
 router.get('/getproducts', async(req, res) => {
     try {
         console.log("Attempting to get products")
@@ -13,6 +15,7 @@ router.get('/getproducts', async(req, res) => {
     }
 })
 
+// Updates product in database
 router.post('/updateproduct', async(req, res) => {
     try {
         console.log("Attempting to update product")
@@ -48,6 +51,7 @@ router.post('/updateproduct', async(req, res) => {
     }
 })
 
+// Inserts a product into database
 router.post('/addproduct', async(req, res) => {
     try {
         console.log("Attempting to add a new product.")
@@ -70,6 +74,7 @@ router.post('/addproduct', async(req, res) => {
     }
 })
 
+// Deletes a product from database
 router.post('/deleteproduct', async(req, res) => {
     try {
         console.log("Attempting to delete product")

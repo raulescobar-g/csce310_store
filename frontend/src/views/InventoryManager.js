@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 
+// Written by Zeeshan V
 export function InventoryManager() {
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
@@ -7,6 +8,7 @@ export function InventoryManager() {
     const [description, setDescription] = useState("");
     const [productID, setID] = useState("");
 
+    // Inserts a new element into database using provided information
     function handleAddProduct(event) {
         event.preventDefault();
         
@@ -28,6 +30,7 @@ export function InventoryManager() {
         })
     }
 
+    // Updates element in database based on information
     function handleUpdateProducts(event) {
         event.preventDefault();
         
@@ -49,6 +52,7 @@ export function InventoryManager() {
         })
     }
 
+    // Queries the database for the full list of products
     function handleGetProducts(event) {
         event.preventDefault();
 
@@ -57,6 +61,7 @@ export function InventoryManager() {
 
     }
     
+    // Deletes product from database
     function handleDeleteProduct(event) {
         event.preventDefault();
         const data = {
@@ -69,6 +74,7 @@ export function InventoryManager() {
         })
     }
 
+    // Frontend for Inventory Management
     return (
         <div className="productManagement" style={{marginTop:'56px', marginBottom:'10px'}}>
             <button size="lg" type="button" style={{marginTop:'15px'}} onClick={handleGetProducts}>Get Products</button><br></br>

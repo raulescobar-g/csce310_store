@@ -1,15 +1,18 @@
 import React, {useState} from 'react'
 
+// Written by Zeeshan V
 export function Register() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [fname, setFName] = useState("");
     const [lname, setLName] = useState("");
 
+    // Checks if email or password fields are empty
     function validateForm() {
         return email.length > 0 && password.length > 0;
     }
 
+    // Attempts to create an account for the user using provided information
     function handleSubmit(event) {
         event.preventDefault();
         
@@ -31,6 +34,7 @@ export function Register() {
         })
     }
 
+    // Frontend for register page
     return (
         <div className="login" style={{marginTop:'56px', marginBottom:'10px'}}>
             <p style={{paddingTop:'10px'}}>Create your account</p>

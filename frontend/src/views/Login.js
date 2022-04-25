@@ -1,13 +1,16 @@
 import React, {useState} from 'react'
 
+// Written by Zeeshan V
 export function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    // Checks if email or password fields are empty
     function validateForm() {
         return email.length > 0 && password.length > 0;
     }
 
+    // Calls backend to attempt a login with the filled email and password
     function handleSubmit(event) {
         event.preventDefault();
         
@@ -27,6 +30,7 @@ export function Login() {
         })
     }
 
+    // Frontend for Login page
     return (
         <div className="login" style={{marginTop:'56px', marginBottom:'10px'}}>
             <p style={{paddingTop:'10px'}}>Login to your account.</p>

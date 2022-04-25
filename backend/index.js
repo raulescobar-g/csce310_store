@@ -10,6 +10,8 @@ const userRouter = require('./routes/users')
 const productRouter = require('./routes/products.js')
 const warehouseRouter = require('./routes/warehouses.js')
 const cartRouter = require('./routes/carts.js')
+const storeRouter = require('./routes/store.js')
+
 
 const Pool = require('pg').Pool
 const pool = new Pool({
@@ -46,6 +48,7 @@ app.use('/payments', paymentRouter);
 app.use('/products', productRouter);
 app.use('/warehouses',warehouseRouter);
 app.use('/carts', cartRouter)
+app.use('/stores', storeRouter);
 
 
 app.listen(port, () => {
