@@ -9,6 +9,7 @@ const paymentRouter = require('./routes/payment.js')
 const userRouter = require('./routes/users')
 const productRouter = require('./routes/products.js')
 const warehouseRouter = require('./routes/warehouses.js')
+const storeRouter = require('./routes/stores.js')
 
 const Pool = require('pg').Pool
 const pool = new Pool({
@@ -40,17 +41,12 @@ app.get('/', (req, res) => {
 
 
 //ROUTES//
-<<<<<<< HEAD
-const userRouter = require('./routes/users')
-app.use('/users', userRouter)
-app.use('/products', require('./routes/products'))
-=======
 app.use('/users', userRouter);
 app.use('/payment', paymentRouter);
 app.use('/products', productRouter);
 app.use('/warehouses',warehouseRouter);
+app.use('/stores', storeRouter);
 
->>>>>>> 77c264ce37318cff4db324fc8f41b29f6b9511f0
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`)

@@ -14,6 +14,7 @@ import ProductList from "./components/products/ProductList";
 
 import "./App.css";
 import { InventoryManager } from "./views/InventoryManager";
+import { StoreLocations } from "./views/StoreLocations";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -33,6 +34,7 @@ function App() {
           <Route path="/history" element={<History />} />
           <Route path="/account" element={<Account />} />
           <Route path="/manageinventory" element={<InventoryManager />} />
+          <Route path="/stores" element={<StoreLocations />} />
         </Routes>
       </Template>
     </div>
