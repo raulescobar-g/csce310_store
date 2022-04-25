@@ -52,7 +52,7 @@ export function StoreLocations() {
         })
     }
 
-    // Queries the database for the full list of products
+    // Queries the database for the full list of stores
     function handleGetStores(event) {
         event.preventDefault();
 
@@ -61,7 +61,7 @@ export function StoreLocations() {
 
     }
     
-    // Deletes product from database
+    // Deletes store from database
     function handleDeleteStores(event) {
         event.preventDefault();
         const data = {
@@ -74,7 +74,7 @@ export function StoreLocations() {
         })
     }
 
-    // Frontend for Inventory Management
+    // Frontend for Store Management
     return (
         <div className="storeManagement" style={{marginTop:'56px', marginBottom:'10px'}}>
             <button size="lg" type="button" style={{marginTop:'15px'}} onClick={handleGetStores}>Get all Stores</button><br></br>

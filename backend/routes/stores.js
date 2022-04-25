@@ -15,7 +15,7 @@ router.get('/get', async(req, res) => {
     }
 })
 
-// Updates product in database
+// Updates store in database
 router.post('/update', async(req, res) => {
     try {
         console.log("Attempting to update store")
