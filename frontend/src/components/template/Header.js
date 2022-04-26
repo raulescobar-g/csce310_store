@@ -76,6 +76,11 @@ function Header() {
                     </Link>
                   </li>
                   <li>
+                    <Link to="/stores" className="dropdown-item" onClick={changeNav}>
+                      Manage Stores
+                    </Link>
+                  </li>
+                  <li>
                     <Link to="/settings" className="dropdown-item" onClick={changeNav}>
                       Settings
                     </Link>
