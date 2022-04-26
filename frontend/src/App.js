@@ -11,6 +11,7 @@ import Template from "./components/template/Template";
 import Landing from "./components/landing/Landing";
 import ProductDetail from "./components/products/detail/ProductDetail";
 import ProductList from "./components/products/ProductList";
+import Settings from "./components/Settings";
 
 import "./App.css";
 import { InventoryManager } from "./views/InventoryManager";
@@ -25,6 +26,7 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/products" element={<ProductList />} />
           <Route path="/products/:slug" element={<ProductDetail />} />
+          <Route path="/settings" element={<Settings />} />
           <Route path="/store" element={<Store />} />
           <Route path="/cart" element={<Cart cart={cart} setCart={setCart}/>} />
           <Route path="/login" element={<Login />} />

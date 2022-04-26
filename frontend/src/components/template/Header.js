@@ -75,6 +75,11 @@ function Header() {
                       Manage Inventory
                     </Link>
                   </li>
+                  <li>
+                    <Link to="/settings" className="dropdown-item" onClick={changeNav}>
+                      Settings
+                    </Link>
+                  </li>
                 </ul>
               </li>
             </ul>

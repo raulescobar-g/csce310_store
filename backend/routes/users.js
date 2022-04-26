@@ -28,7 +28,7 @@ router.get('/getuser/', async(req, res) => {
 router.get('/getuser/:id', async(req, res) => {
     try {
         const {id} = req.params
-        const newUser = await pool.query("SELECT * FROM users WHERE userId=$1", [id])
+        const newUser = await req.app.get('pool').query("SELECT * FROM users WHERE userId=$1", [id])
         res.json(newUser.rows)
         //console.log(newUser.rows)
     } catch (error) {
@@ -36,12 +36,24 @@ router.get('/getuser/:id', async(req, res) => {
     }
 })
   
+// update a users information
+router.put('/updateinfo/:id', async(req, res) => {
+    try {
+        const {id} = req.params
+        const {newFirstname, newLastname, newEmail, newPassword} = req.body
+        const updateUser = await req.app.get('pool').query("UPDATE users SET firstname = $1, lastname = $2, email = $3, password = $4 WHERE userId= $5", [newFirstname, newLastname, newEmail, newPassword, id])
+        console.log("updated user")
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 // update a users password
 router.put('/update/:id', async(req, res) => {
     try {
         const {id} = req.params
         const {newPassword} = req.body
-        const updateUser = await pool.query("UPDATE users SET password = $1 WHERE userId= $2", [newPassword, id])
+        const updateUser = await req.app.get('pool').query("UPDATE users SET password = $1 WHERE userId= $2", [newPassword, id])
         console.log("updated user")
     } catch (error) {
         console.log(error)
@@ -52,7 +64,7 @@ router.put('/update/:id', async(req, res) => {
 router.delete('/delete/:id', async(req, res) => {
     try {
         const {id} = req.params
-        const deleteUser = await pool.query("DELETE FROM users WHERE userID = $1", [id])
+        const deleteUser = await req.app.get('pool').query("DELETE FROM users WHERE userID = $1", [id])
         console.log("deleted user")
     } catch (error) {
         console.log(error)

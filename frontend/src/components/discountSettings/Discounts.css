@@ -1,0 +1,51 @@
+.Discounts {
+  text-align: center;
+}
+.discountsContainer {
+  padding-top: 10px;
+}
+/* .appHeader {
+  background-color: #222;
+  height: 100px;
+  color: white;
+  text-align: center;
+} */
+.headerText {
+  padding: 1px;
+}
+.bsLogo {
+  width: 200px;
+  height: auto;
+}
+/* .appFooter {
+  background-color: #222;
+  height: 70px;
+  color: white;
+  text-align: center;
+} */
+
+
+.done {
+  text-decoration: line-through;
+  color: #ACACAC;
+}
+.errorMsg {
+  text-align: center;
+}
+.right {
+  text-align: right;
+}
+.blue {
+  color: #2B96FE;
+}
+
+
+/* overrides */
+.form-control2 {
+  /* border-radius: 0px; */
+  /* border-color: #FFF !important; */
+  margin-right: 10px;
+}
+.addBtn2 {
+  border-color: black !important;
+}
