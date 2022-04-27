@@ -11,7 +11,7 @@ const productRouter = require('./routes/products.js')
 const warehouseRouter = require('./routes/warehouses.js')
 const discountRouter = require('./routes/discounts')
 const cartRouter = require('./routes/carts.js')
-const storeRouter = require('./routes/store.js')
+const storeRouter = require('./routes/stores.js')
 
 
 const Pool = require('pg').Pool
