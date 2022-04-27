@@ -316,3 +316,8 @@ ul.settings-menu li.menu-item.active a:before {
   text-shadow: 1px 1px #fff;
   color: #3f3f3f;
 }
+
+.deleteUser {
+  width: 100px;
+  background-color: red;
+}

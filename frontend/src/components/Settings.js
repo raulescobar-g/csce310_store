@@ -100,6 +100,12 @@ export default class Settings extends React.Component {
       this.prefs.className = "md-modal show";
       this.overlay.style.visibility = "visible";
     }
+
+    deleteUser() {
+      fetch('http://localhost:5000/users/delete/',
+      { method: 'DELETE' })
+      .then(response => response.json())
+    }
   
     render() {
       // Get settings
@@ -269,6 +275,7 @@ export default class Settings extends React.Component {
                       defaultValue={settings["mysettings.general.password"]}
                     />
                   </fieldset>
+                  <button onClick={this.deleteUser()} className="btn btn-danger " style={{width: "150px", marginTop: "15px", marginLeft: "auto"}}>Delete Account</button>
                   {/* <fieldset className="form-group">
                     <label htmlFor="profileColor">Color-Theme: </label>
                     <select
