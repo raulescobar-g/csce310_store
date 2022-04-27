@@ -9,6 +9,7 @@ router.get('/getproducts', async(req, res) => {
 
         const products = await req.app.get('pool').query("SELECT * FROM product")
         console.log( products.rows )
+        res.json( products.rows )
 
     } catch (e) {
         console.log(e)

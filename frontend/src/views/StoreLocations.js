@@ -56,8 +56,25 @@ export function StoreLocations() {
     function handleGetStores(event) {
         event.preventDefault();
 
-        fetch("http://localhost:5000/stores/get")
-        .then((res) => res.json())
+        // fetch("http://localhost:5000/stores/get")
+        // .then(response => response.json())
+        // .then(data => {
+        //     console.log( data[0] )
+        // });
+
+        fetch('http://localhost:5000/stores/get')
+        .then(response => response.json())
+        .then(data => {
+            //alert( data[0].address )
+
+            var list = document.getElementById("listOfStores");
+            list.innerHTML = ''
+            for (var i in data) {
+                var anchor = document.createElement("li");
+                anchor.innerText = data[i].store_id + ": " + data[i].address + ", " + data[i].city + ", " + data[i].state + " " + data[i].zip;
+                list.appendChild(anchor);
+            }
+        });
 
     }
     
@@ -104,6 +121,10 @@ export function StoreLocations() {
                 <input name="id" id="id" type="text" class="login-text" autoFocus value={storeID} onChange={(e) => setID(e.target.value)}></input>
                 <button block size="lg" type="submit" style={ {marginLeft:'10px'} }>Delete</button>
             </form>
+
+            <p>List of all stores</p>
+            <ul id="listOfStores" style={{listStyle:'none'}}>
+            </ul>
         </div>
     )
 }
