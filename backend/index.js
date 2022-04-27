@@ -11,13 +11,13 @@ const productRouter = require('./routes/products.js')
 const warehouseRouter = require('./routes/warehouses.js')
 const discountRouter = require('./routes/discounts')
 const cartRouter = require('./routes/carts.js')
-const storeRouter = require('./routes/store.js')
+const storeRouter = require('./routes/stores.js')
 
 
 const Pool = require('pg').Pool
 const pool = new Pool({
   user:         'postgres',
-  host:         'project',
+  host:         'database.cqjgso15f4k1.us-east-1.rds.amazonaws.com',
   database:     'project',
   password:     'csce310group8',
   port:         5432,
