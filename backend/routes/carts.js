@@ -38,7 +38,7 @@ router.post('/', async (req, res) => {
 router.get('/:user_id', async (req, res) => {
     try {
         const user_id = req.params.user_id
-        const cart_arr = await req.app.get('pool').query("SELECT product_name, product_description, product_price, product_brand,quantity FROM cart JOIN product ON cart.product_id=product.product_id where user_id=$1", [user_id])
+        const cart_arr = await req.app.get('pool').query("SELECT product.product_id, product_name, product_description, product_price, product_brand,quantity FROM cart JOIN product ON cart.product_id=product.product_id where user_id=$1", [user_id])
         console.log(cart_arr.rows)
         res.send({cart: cart_arr.rows})
     }
@@ -82,17 +82,42 @@ router.delete('/', async (req, res) => {
  */
 router.put('/', async (req, res) => {
     try {
-        const { user_id, product_id,  } = req.body
-        const values = [user_id,cardType,cardNum,expMonth,expYear,cvv,fname,lname,address,city,state,zip, payment_id]
-        if (values.filter(val => !val).length > 0) {
-            res.sendStatus(400)
-            return
-        }
-        const result = await req.app.get('pool').query(`UPDATE payment_method 
-            SET (user_id,card_type,card_number,card_expiration_month,card_expiration_year,card_cvv,cardholder_firstname,cardholder_lastname,billing_address_one,billing_address_city,billing_address_state,billing_address_zip)=($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
-            WHERE payment_id=$13;`, values)
+        const { user_id, product_id,  qty} = req.body
+        console.log(product_id)
+        console.log(user_id)
+        const cart_item = await req.app.get('pool').query("SELECT * FROM cart WHERE product_id=$1 AND user_id=$2;", [product_id, user_id])
+        
+        if (qty == -1) {
+            if (cart_item.rows[0].quantity < 2){
+                const result = await req.app.get('pool').query(`DELETE FROM cart WHERE product_id=$1 AND user_id=$2;`, [product_id, user_id])
+                if (result.rowCount === 1) {
+                    res.sendStatus(200)
+                    return
+                }
+                else {
+                    res.sendStatus(400)
+                    return
+                }
+            }
+            else {
+                const result = await req.app.get('pool').query('UPDATE cart SET quantity=$3 WHERE user_id=$2 AND product_id=$1;', [product_id, user_id, cart_item.rows[0].quantity-1])
+                if (result.rowCount === 1) {
+                    res.sendStatus(200)
+                    return
+                }
+                else {
+                    res.sendStatus(400)
+                    return
+                }
+            }
+        } 
+        console.log(cart_item.rows)
+        const result = await req.app.get('pool').query('UPDATE cart SET quantity=$3 WHERE user_id=$2 AND product_id=$1;', [product_id,user_id, cart_item.rows[0].quantity+1])
         if (result.rowCount === 1) {
             res.sendStatus(200)
+        }
+        else {
+            res.sendStatus(400)
         }
     }
     catch (e) {

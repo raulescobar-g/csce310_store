@@ -25,6 +25,7 @@ function App() {
 
   useEffect(() => {
     const user_id = getFromStorage('user_id')
+    console.log(user_id)
     fetch(`http://localhost:5000/carts/${user_id}`)
     .then(response => response.json())
     .then(data => {
