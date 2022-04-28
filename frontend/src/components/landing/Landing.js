@@ -11,8 +11,8 @@ function Landing() {
       <Banner />
       <div className="d-flex flex-column bg-white py-4">
         <p className="text-center px-5">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Browse through our selection of availables products or look at our new arrivals. Exclusive items
+          for a limited time. Don't forget to use our promocode 'SALE20' to get 20% off your purchase.
         </p>
         <div className="d-flex justify-content-center">
           <Link to="/products" className="btn btn-primary" replace>
