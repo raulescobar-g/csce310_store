@@ -58,6 +58,15 @@ export function InventoryManager() {
 
         fetch("http://localhost:5000/products/getproducts")
         .then((res) => res.json())
+        .then((data) => {
+            var list = document.getElementById("listOfInventory");
+            list.innerHTML = ''
+            for (var i in data) {
+                var anchor = document.createElement("li");
+                anchor.innerHTML = data[i].product_id + ": " + data[i].product_name + "; $" + data[i].product_price + "; " + data[i].product_brand + "; " + data[i].product_description
+                list.appendChild(anchor);
+            }
+        })
 
     }
     
@@ -104,6 +113,10 @@ export function InventoryManager() {
                 <input name="productid" id="productid" type="text" class="login-text" autoFocus value={productID} onChange={(e) => setID(e.target.value)}></input>
                 <button block size="lg" type="submit" style={ {marginLeft:'10px'} }>Delete</button>
             </form>
+
+            <p>List of all inventory</p>
+            <ul id="listOfInventory" style={{listStyle:'none'}}>
+            </ul>
         </div>
     )
 }

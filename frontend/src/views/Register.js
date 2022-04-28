@@ -39,19 +39,19 @@ export function Register() {
         <div className="login" style={{marginTop:'56px', marginBottom:'10px'}}>
             <p style={{paddingTop:'10px'}}>Create your account</p>
             <form onSubmit={handleSubmit}>
-                <label for="fname" class="login-label">First Name</label>
+                <label for="fname" class="login-label">First Name:</label>
                 <input name="fname" id="fname" type="text" class="login-text" autoFocus value={fname} onChange={(e) => setFName(e.target.value)}></input><br></br>
 
-                <label for="lname" class="login-label">Last Name</label>
+                <label for="lname" class="login-label">Last Name:</label>
                 <input name="lname" id="lname" type="text" class="login-text" autoFocus value={lname} onChange={(e) => setLName(e.target.value)}></input><br></br>
 
-                <label for="email" class="login-label">Email</label>
+                <label for="email" class="login-label">Email:</label>
                 <input name="email" id="email" type="email" class="login-text" autoFocus value={email} onChange={(e) => setEmail(e.target.value)}></input><br></br>
 
-                <label for="password" class="login-label">Password</label>
+                <label for="password" class="login-label">Password:</label>
                 <input name="password" id="password" type="password" class="login-text" autoFocus value={password} onChange={(e) => setPassword(e.target.value)}></input><br></br>
 
-                <button block size="lg" type="submit" disabled={!validateForm()}>
+                <button className="btn btn-secondary btn-block" type="submit" disabled={!validateForm()}>
                 Login
                 </button>
             </form>

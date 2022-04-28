@@ -7,8 +7,9 @@ router.get('/get', async(req, res) => {
     try {
         console.log("Attempting to get stores")
 
-        const products = await req.app.get('pool').query("SELECT * FROM warehouse")
-        console.log( products.rows )
+        const stores = await req.app.get('pool').query("SELECT * FROM warehouse")
+        console.log( stores.rows )
+        res.json( stores.rows )
 
     } catch (e) {
         console.log(e)
