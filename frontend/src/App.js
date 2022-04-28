@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { Store } from './views/Store'
 import { Login } from './views/Login'
 import { Register } from './views/Register'
@@ -17,22 +17,20 @@ import "./App.css";
 import { InventoryManager } from "./views/InventoryManager";
 import { StoreLocations } from "./views/StoreLocations";
 
-function App() {
+import { getFromStorage } from './utils/localStorage'
 
+
+function App() {
   const [cart, setCart] = useState([]);
-  const [user, setUser] = useState({user_id : -1})
 
   useEffect(() => {
-    const options = {
-
-    }
-    const cart_arr = fetch("http://localhost:5000/cart/", options).then(data => {
-      return data
-    }).catch(err => {
-      console.log(err)
-    })
-    
-  }, [])
+    const user_id = getFromStorage('user_id')
+    fetch(`http://localhost:5000/carts/${user_id}`)
+    .then(response => response.json())
+    .then(data => {
+      setCart(data.cart)}
+    )
+  },[])
 
   return (
     <div className="App">

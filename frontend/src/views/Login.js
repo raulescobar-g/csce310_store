@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { saveToStorage } from '../utils/localStorage';
 
 // Written by Zeeshan V
 export function Login() {
@@ -23,7 +24,8 @@ export function Login() {
             body: JSON.stringify(data)
         })
         .then((data) => {
-            
+            console.log(data)
+            saveToStorage(data.user_id, 'user_id')
         })
         .catch(res=>{
             console.log("Exception : ",res);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { InputBox } from '../components/Input'
 import { OrderSummary } from '../components/OrderSummary'
 import { Select } from '../components/Select'
@@ -12,9 +12,6 @@ const Main = styled.div`
 `
 const Column = styled.div`
     padding: 3rem;
-    width: ${props => props.small ? "20vw":"80vw"};
-    background-color: ${props => props.small ? "var(--bs-indigo)" : ""};
-    align-self: ${props => props.center ? "center":""};
 `
 
 const Row = styled.div`
@@ -46,6 +43,8 @@ export function Payment() {
     const [expMonth, setExpMonth] = useState("");
     const [expYear, setExpYear] = useState("")
 
+    const [display, setDisplay] = useState(0);
+
     const cardTypeOptions = ["AMEX","VISA","Master Card","Other"]
 
     const handleSubmit = async () => {
@@ -66,8 +65,20 @@ export function Payment() {
         }
     }
 
+    // useEffect(() => {
+    //     //const user_id = getFromStorage('user_id')
+    //     const user_id = 1;
+    //     fetch(`http://localhost:5000/payments/${user_id}`)
+    //     .then(response => response.json())
+    //     .then(data => {
+    //       console.log(data)
+    //       return data
+    //     )
+    // },[])
+
     return (
         <Main>
+            {display===1 && 
             <Column center>
                 <div>
                     <Row>
@@ -96,10 +107,12 @@ export function Payment() {
                     </Row>
                     <button onClick={handleSubmit}>Submit</button>
                 </div>
-            </Column>
-            <Column small>
-                <OrderSummary order={order}/>
-            </Column>
+            </Column>}
+            {display===0 && 
+            <Column center>
+            <div>Payment Methods Available</div>
+        </Column>
+        }
         </Main>
     )
 }

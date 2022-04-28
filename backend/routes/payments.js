@@ -32,9 +32,9 @@ router.post('/', async (req, res) => {
  * If missing value will return 400 status
  * else will query for payment methods associated to user and returns that array
  */
-router.get('/', async (req, res) => {
+router.get('/:user_id', async (req, res) => {
     try {
-        const user_id = req.body.user_id
+        const user_id = req.params.user_id
         const paymentMethods = await req.app.get('pool').query("SELECT * FROM payment_method WHERE user_id=$1", user_id)
         res.send({methods: paymentMethods})
     }

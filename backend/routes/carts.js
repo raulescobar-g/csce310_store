@@ -35,11 +35,12 @@ router.post('/', async (req, res) => {
  * If missing value will return 400 status
  * else will query for payment methods associated to user and returns that array
  */
-router.get('/', async (req, res) => {
+router.get('/:user_id', async (req, res) => {
     try {
-        const user_id = req.body.user_id
-        const cart_arr = await req.app.get('pool').query("SELECT product_name, product_description, product_price, product_brand,quantity FROM cart JOIN product ON cart.product_id=product.product_id", [user_id])
-        res.send({cart: cart_arr})
+        const user_id = req.params.user_id
+        const cart_arr = await req.app.get('pool').query("SELECT product_name, product_description, product_price, product_brand,quantity FROM cart JOIN product ON cart.product_id=product.product_id where user_id=$1", [user_id])
+        console.log(cart_arr.rows)
+        res.send({cart: cart_arr.rows})
     }
     catch (e) {
         console.log(e)
