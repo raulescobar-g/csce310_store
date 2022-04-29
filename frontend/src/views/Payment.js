@@ -142,17 +142,29 @@ export function Payment() {
             <Column>
                 <div>Payment Methods Available</div>
                 <div>
+
                     {paymentMethods.length > 0 ?
-                        paymentMethods.map(paymeth => {
-                            return (
-                                <Row>
-                                    <Col>{paymeth.cardholder_firstname} {paymeth.cardholder_lastname}</Col>
-                                    <Col>{paymeth.card_number}</Col>
-                                    <Col>{paymeth.card_expiration_month}/{paymeth.card_expiration_year}</Col>
-                                    <Col>{paymeth.card_number}</Col>
-                                </Row>
-                            )
-                        }) :
+                        <>
+                            <Row>
+                                <Col>Carholder Name</Col>
+                                <Col>Card Number</Col>
+                                <Col>Card Expiration Date</Col>
+                                <Col>Card Type</Col>
+                                <Col>Edit/Delete</Col>
+                            </Row>
+                        
+                            {paymentMethods.map(paymeth => {
+                                return (
+                                    <Row>
+                                        <Col>{paymeth.cardholder_firstname} {paymeth.cardholder_lastname}</Col>
+                                        <Col>{paymeth.card_number}</Col>
+                                        <Col>{paymeth.card_expiration_month}/{paymeth.card_expiration_year}</Col>
+                                        <Col>{paymeth.card_type}</Col>
+                                        <Col><Button>Edit</Button><Button>Delete</Button></Col>
+                                    </Row>
+                                )
+                            }) }
+                        </> :
                         <>
                             <p>You have no payment methods yet</p>
                             
