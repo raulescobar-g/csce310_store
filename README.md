@@ -11,3 +11,8 @@ make run
 ```
 
 go to : <a href="http://localhost:3000"> go here </a>
+
+
+- Raul
+    - cart
+    - payment

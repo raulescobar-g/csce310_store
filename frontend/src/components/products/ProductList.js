@@ -19,6 +19,7 @@ const brands = ["Apple", "Samsung", "Google", "HTC"];
 const manufacturers = ["HOCO", "Nillkin", "Remax", "Baseus"];
 
 function FilterMenuLeft() {
+
   return (
     <ul className="list-group list-group-flush rounded">
       <li className="list-group-item d-none d-lg-block">
@@ -96,8 +97,9 @@ function FilterMenuLeft() {
   );
 }
 
-function ProductList() {
+function ProductList({products, setProducts}) {
   const [viewType, setViewType] = useState({ grid: true });
+
 
   function changeViewType() {
     setViewType({

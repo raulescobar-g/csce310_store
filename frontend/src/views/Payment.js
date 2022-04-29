@@ -3,31 +3,49 @@ import { InputBox } from '../components/Input'
 import { OrderSummary } from '../components/OrderSummary'
 import { Select } from '../components/Select'
 import styled from 'styled-components'
+import { getFromStorage } from '../utils/localStorage'
+
 
 const Main = styled.div`
     display:flex;
     flex-direction: row;
     height: calc(100vh - 7rem);
     margin-top: 3.5rem;
+    justify-content: center;
 `
 const Column = styled.div`
-    padding: 3rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
 `
 
-const Row = styled.div`
-    display:flex;
-    flex-direction: row;
-    padding-block-end: 1.5rem;
-`
 const Even = styled.div`
     display:flex;
     flex-direction: row;
     justify-content: space-evenly;
 `
 
+const Row = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-radius: 10px;
+    border: 1px solid grey;
+    margin-bottom: 1rem;
+    padding: 1rem;
+`
+const Button = styled.button`
+    padding:0.3rem;
+    background: grey;
+`
+const Col = styled.div`
+    justify-content: space-around;
+    margin-bottom: 1rem;
+    padding: 1rem;
+`
+
 export function Payment() {
 
-    const order = {"things" : 1, "things1" : 1, "things2" : 1, "things3" : 1, "things4" : 1}
     const months = [1,2,3,4,5,6,7,8,9,10,11,12]
     const years = [22,23,24,25,26,27,28,29,30]
 
@@ -45,11 +63,14 @@ export function Payment() {
 
     const [display, setDisplay] = useState(0);
 
+    const [paymentMethods, setPaymentMethods] = useState([])
+
     const cardTypeOptions = ["AMEX","VISA","Master Card","Other"]
 
     const handleSubmit = async () => {
         try{
-            const data = {"cardNum":cardNum, "cardType":cardType, "address":address, "zip":zip, "city":city, "state":state, "cvv":cvv, "fname":fname, "lname":lname, "expMonth":expMonth, "expYear":expYear}
+            const user_id = getFromStorage('user_id')
+            const data = {"cardNum":cardNum, "cardType":cardType, "address":address, "zip":zip, "city":city, "state":state, "cvv":cvv, "fname":fname, "lname":lname, "expMonth":expMonth, "expYear":expYear, "user_id":user_id}
             const options = {
                 headers: {
                     'Content-Type': 'application/json'
@@ -57,29 +78,38 @@ export function Payment() {
                 method: 'POST',
                 body: JSON.stringify(data)
             }
-            const req = await fetch("http://localhost:5000/payment/", options); 
-            console.log(req)
+            const req = await fetch(`http://localhost:5000/payments/`, options); 
+            setDisplay(0)
         }
         catch (e) {
             console.log(e)
         }
     }
 
-    // useEffect(() => {
-    //     //const user_id = getFromStorage('user_id')
-    //     const user_id = 1;
-    //     fetch(`http://localhost:5000/payments/${user_id}`)
-    //     .then(response => response.json())
-    //     .then(data => {
-    //       console.log(data)
-    //       return data
-    //     )
-    // },[])
+    useEffect(() => {
+        const user_id = getFromStorage('user_id')
+        fetch(`http://localhost:5000/payments/${user_id}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            setPaymentMethods(data.methods)
+        }).catch(e => {
+            console.log(e)
+        })
+    }, [])
+
+    const goBack = () => {
+        setDisplay(0)
+    }
+
+    const addPayment = () => {
+        setDisplay(1)
+    }
 
     return (
         <Main>
             {display===1 && 
-            <Column center>
+            <Column>
                 <div>
                     <Row>
                         <InputBox id="fname" type="text" title="First Name" onChange={e => setFname(e.target.value)} value={fname} />
@@ -105,12 +135,31 @@ export function Payment() {
                         <InputBox id="city" type="text" title="City" onChange={e => setCity(e.target.value)} value={city} />
                         <InputBox id="state" type="text" title="State" onChange={e => setState(e.target.value)} value={state} />
                     </Row>
-                    <button onClick={handleSubmit}>Submit</button>
+                    <button onClick={goBack}>Go Back</button><button onClick={handleSubmit}>Add</button>
                 </div>
             </Column>}
             {display===0 && 
-            <Column center>
-            <div>Payment Methods Available</div>
+            <Column>
+                <div>Payment Methods Available</div>
+                <div>
+                    {paymentMethods.length > 0 ?
+                        paymentMethods.map(paymeth => {
+                            return (
+                                <Row>
+                                    <Col>{paymeth.cardholder_firstname} {paymeth.cardholder_lastname}</Col>
+                                    <Col>{paymeth.card_number}</Col>
+                                    <Col>{paymeth.card_expiration_month}/{paymeth.card_expiration_year}</Col>
+                                    <Col>{paymeth.card_number}</Col>
+                                </Row>
+                            )
+                        }) :
+                        <>
+                            <p>You have no payment methods yet</p>
+                            
+                        </>
+                    }
+                    <Button onClick={addPayment}>Add one</Button>
+                </div>
         </Column>
         }
         </Main>

@@ -22,6 +22,7 @@ import { getFromStorage } from './utils/localStorage'
 
 function App() {
   const [cart, setCart] = useState([]);
+  const [products, setProducts] = useState([])
 
   useEffect(() => {
     const user_id = getFromStorage('user_id')
@@ -37,7 +38,7 @@ function App() {
       <Template cart={cart} setCart={setCart}>
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/products" element={<ProductList />} />
+          <Route path="/products" element={<ProductList products={products} setProducts={setProducts}/>} />
           <Route path="/products/:slug" element={<ProductDetail />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/store" element={<Store />} />

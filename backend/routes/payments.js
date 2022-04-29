@@ -35,8 +35,9 @@ router.post('/', async (req, res) => {
 router.get('/:user_id', async (req, res) => {
     try {
         const user_id = req.params.user_id
-        const paymentMethods = await req.app.get('pool').query("SELECT * FROM payment_method WHERE user_id=$1", user_id)
-        res.send({methods: paymentMethods})
+        const paymentMethods = await req.app.get('pool').query("SELECT * FROM payment_method WHERE user_id=$1", [user_id])
+        console.log(paymentMethods)
+        res.send({methods: paymentMethods.rows})
     }
     catch (e) {
         console.log(e)
