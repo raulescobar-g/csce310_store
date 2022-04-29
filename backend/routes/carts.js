@@ -90,35 +90,25 @@ router.put('/', async (req, res) => {
         if (qty == -1) {
             if (cart_item.rows[0].quantity < 2){
                 const result = await req.app.get('pool').query(`DELETE FROM cart WHERE product_id=$1 AND user_id=$2;`, [product_id, user_id])
-                if (result.rowCount === 1) {
-                    res.sendStatus(200)
-                    return
-                }
-                else {
+                if (result.rowCount !== 1) {
                     res.sendStatus(400)
                     return
                 }
-            }
-            else {
+            } else {
                 const result = await req.app.get('pool').query('UPDATE cart SET quantity=$3 WHERE user_id=$2 AND product_id=$1;', [product_id, user_id, cart_item.rows[0].quantity-1])
-                if (result.rowCount === 1) {
-                    res.sendStatus(200)
-                    return
-                }
-                else {
+                if (result.rowCount !== 1) {
                     res.sendStatus(400)
                     return
                 }
             }
-        } 
-        console.log(cart_item.rows)
-        const result = await req.app.get('pool').query('UPDATE cart SET quantity=$3 WHERE user_id=$2 AND product_id=$1;', [product_id,user_id, cart_item.rows[0].quantity+1])
-        if (result.rowCount === 1) {
-            res.sendStatus(200)
+        } else {
+            const result = await req.app.get('pool').query('UPDATE cart SET quantity=$3 WHERE user_id=$2 AND product_id=$1;', [product_id,user_id, cart_item.rows[0].quantity+1])
+            if (result.rowCount !== 1) {
+                res.sendStatus(400)
+                return
+            }
         }
-        else {
-            res.sendStatus(400)
-        }
+        res.sendStatus(200)
     }
     catch (e) {
         console.log(e)

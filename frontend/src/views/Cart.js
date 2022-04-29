@@ -29,24 +29,36 @@ export function Cart({cart, setCart}) {
         nav("/payment")
     }
     const onPlus = async (e) => {
-        const user_id = getFromStorage('user_id')
-        const options = {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "user_id": user_id,
-                "product_id":e.target.id,
-                "qty":1
-
-            })
-        }
-        const res = await fetch("http://localhost:5000/carts/", options)
-        console.log(res)
+        await updateCart(e, 1)
     }
-    const onMinus = (e) => {
 
+    const onMinus = async (e) => {
+        await updateCart(e, -1)
+    }
+
+    const updateCart = async (e, amount) => {
+        try{
+            const user_id = getFromStorage('user_id')
+            const options = {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "user_id": user_id,
+                    "product_id":e.target.id,
+                    "qty":amount
+
+                })
+            }
+            const _ = await fetch("http://localhost:5000/carts/", options)
+
+            const new_cart = await fetch(`http://localhost:5000/carts/${user_id}`)
+            const jsoned = await new_cart.json()
+            setCart(jsoned.cart)
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     return (

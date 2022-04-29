@@ -1,8 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { Cart } from "../../views/Cart";
 
-function Header() {
+function Header({cart, setCart}) {
 
   const [openedDrawer, setOpenedDrawer] = useState(false)
 
@@ -40,7 +41,7 @@ function Header() {
             <a href="/cart">
               <button type="button" className="btn btn-outline-dark me-3 d-none d-lg-inline">
                 <FontAwesomeIcon icon={["fas", "shopping-cart"]} />
-                <span className="ms-3 badge rounded-pill bg-dark">0</span>
+                <span className="ms-3 badge rounded-pill bg-dark">{cart.reduce((sum, item) => sum+item.quantity,0)}</span>
               </button>
             </a>
             <ul className="navbar-nav mb-2 mb-lg-0">
