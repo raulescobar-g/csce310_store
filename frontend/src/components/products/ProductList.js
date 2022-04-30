@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Product from "./Product";
 import ProductH from "./ProductH";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ScrollToTopOnMount from "../template/ScrollToTopOnMount";
 
@@ -106,6 +106,17 @@ function ProductList({products, setProducts}) {
       grid: !viewType.grid,
     });
   }
+
+  const [state, setState] = useState({ items: [] });
+
+  useEffect( () => { 
+    fetch('http://localhost:5000/products/getproducts/')
+  .then(response => response.json())
+  .then(data => {
+    setState({ 
+      items: data})
+      console.log(data)
+    }); }, [])
 
   return (
     <div className="container mt-5 py-4 px-xl-5">
@@ -224,7 +235,7 @@ function ProductList({products, setProducts}) {
                 (viewType.grid ? "row-cols-xl-3" : "row-cols-xl-2")
               }
             >
-              {Array.from({ length: 10 }, (_, i) => {
+              {/* {Array.from({ length: 10 }, (_, i) => {
                 if (viewType.grid) {
                   return (
                     <Product key={i} percentOff={i % 2 === 0 ? 15 : null} />
@@ -232,6 +243,16 @@ function ProductList({products, setProducts}) {
                 }
                 return (
                   <ProductH key={i} percentOff={i % 4 === 0 ? 15 : null} />
+                );
+              })} */}
+              {state.items.map((item) => {
+                if (viewType.grid) {
+                  return (
+                    <Product key={item.product_id} {...item} percentOff={null} />
+                  );
+                }
+                return (
+                  <ProductH key={item.product_id} {...item} percentOff={null} />
                 );
               })}
             </div>

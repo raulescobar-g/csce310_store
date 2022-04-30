@@ -55,6 +55,6 @@ app.use('/carts', cartRouter)
 app.use('/stores', storeRouter);
 
 
-app.listen(port, () => {
+app.listen(5000, () => {
   console.log(`Server listening on port ${port}`)
 })

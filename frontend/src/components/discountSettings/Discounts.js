@@ -29,7 +29,7 @@ export default class Discounts extends React.Component {
       // discounts
       discounts: []
     };
-
+    
     fetch('http://localhost:5000/discounts/getdiscounts/')
     .then(response => response.json())
     .then(data => {

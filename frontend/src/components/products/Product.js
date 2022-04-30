@@ -1,11 +1,12 @@
-import Image from "../nillkin-case-1.jpg";
+// import Image from "../nillkin-case-1.jpg";
+import Image from "./no_image.webp";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Product(props) {
-  const price = 10000;
+  const price = props.product_price;
   let percentOff;
-  let offPrice = `${price}Ks`;
+  let offPrice = `$${price}`;
 
   if (props.percentOff && props.percentOff > 0) {
     percentOff = (
@@ -27,7 +28,7 @@ function Product(props) {
   return (
     <div className="col">
       <div className="card shadow-sm">
-        <Link to="/products/1" href="!#" replace>
+        <Link to={`/products/${props.product_id}`} state={props} href="!#" replace>
           {percentOff}
           <img
             className="card-img-top bg-dark cover"
@@ -38,7 +39,7 @@ function Product(props) {
         </Link>
         <div className="card-body">
           <h5 className="card-title text-center text-dark text-truncate">
-            Nillkin iPhone X cover
+            {props.product_name}
           </h5>
           <p className="card-text text-center text-muted mb-0">{offPrice}</p>
           <div className="d-grid d-block">

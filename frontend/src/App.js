@@ -25,12 +25,12 @@ function App() {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    const user_id = getFromStorage('user_id')
-    fetch(`http://localhost:5000/carts/${user_id}`)
-    .then(response => response.json())
-    .then(data => {
-      setCart(data.cart)}
-    )
+    // const user_id = getFromStorage('user_id')
+    // fetch(`http://localhost:5000/carts/${user_id}`)
+    // .then(response => response.json())
+    // .then(data => {
+    //   setCart(data.cart)}
+    // )
   },[])
 
   return (
