@@ -9,7 +9,6 @@ const router = express.Router()
  */
 router.post('/', async (req, res) => {
     try {
-        console.log(req.body)
         const { user_id,cardType,cardNum,expMonth,expYear,cvv,fname,lname,address,city,state,zip } = req.body
         const values = [user_id,cardType,cardNum,expMonth,expYear,cvv,fname,lname,address,city,state,zip]
         if (values.filter(val => !val).length > 0) {
@@ -36,7 +35,6 @@ router.get('/:user_id', async (req, res) => {
     try {
         const user_id = req.params.user_id
         const paymentMethods = await req.app.get('pool').query("SELECT * FROM payment_method WHERE user_id=$1", [user_id])
-        console.log(paymentMethods)
         res.send({methods: paymentMethods.rows})
     }
     catch (e) {
@@ -78,7 +76,6 @@ router.delete('/', async (req, res) => {
  */
 router.put('/', async (req, res) => {
     try {
-        console.log(req.body)
         const { user_id,cardType,cardNum,expMonth,expYear,cvv,fname,lname,address,city,state,zip,payment_id } = req.body
         const values = [user_id,cardType,cardNum,expMonth,expYear,cvv,fname,lname,address,city,state,zip, payment_id]
         if (values.filter(val => !val).length > 0) {
