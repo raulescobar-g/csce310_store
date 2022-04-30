@@ -5,8 +5,11 @@ export function InventoryManager() {
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
     const [brand, setBrand] = useState("");
+    const [manufacturer, setManufacturer] = useState("");
     const [description, setDescription] = useState("");
     const [productID, setID] = useState("");
+    const [image, setImage] = useState("");
+    
 
     // Inserts a new element into database using provided information
     function handleAddProduct(event) {
@@ -15,7 +18,10 @@ export function InventoryManager() {
         const data = {  name: document.getElementById("name").value,
                         price:  document.getElementById("price").value,
                         brand: document.getElementById("brand").value,
-                        desc: document.getElementById("desc").value }
+                        manufacturer: document.getElementById("manufacturer").value,
+                        desc: document.getElementById("desc").value,
+                        image: document.getElementById("image").value
+                     }
 
         fetch("http://localhost:5000/products/addproduct", {
             method: 'POST',
@@ -37,7 +43,10 @@ export function InventoryManager() {
         const data = {  name: document.getElementById("name").value,
                         price:  document.getElementById("price").value,
                         brand: document.getElementById("brand").value,
-                        desc: document.getElementById("desc").value }
+                        manufacturer: document.getElementById("manufacturer").value,
+                        desc: document.getElementById("desc").value,
+                        image: document.getElementById("image").value
+                     }
 
         fetch("http://localhost:5000/products/updateproduct", {
             method: 'POST',
@@ -63,7 +72,7 @@ export function InventoryManager() {
             list.innerHTML = ''
             for (var i in data) {
                 var anchor = document.createElement("li");
-                anchor.innerHTML = data[i].product_id + ": " + data[i].product_name + "; $" + data[i].product_price + "; " + data[i].product_brand + "; " + data[i].product_description
+                anchor.innerHTML = data[i].product_id + ": " + data[i].product_name + "; $" + data[i].product_price + "; " + data[i].product_brand + "; " + data[i].manufacturer + "; " + data[i].product_description + "; " + data[i].imagelink
                 list.appendChild(anchor);
             }
         })
@@ -99,9 +108,15 @@ export function InventoryManager() {
                 <label for="brand" class="login-label">Product Brand</label>
                 <input name="brand" id="brand" type="text" class="login-text" autoFocus value={brand} onChange={(e) => setBrand(e.target.value)}></input><br></br>
 
+                <label for="manufacturer" class="login-label">Product Manufacturer</label>
+                <input name="manufacturer" id="manufacturer" type="text" class="login-text" autoFocus value={manufacturer} onChange={(e) => setManufacturer(e.target.value)}></input><br></br>
+
                 <label for="desc" class="login-label">Product Description</label>
                 <input name="desc" id="desc" type="text" class="login-text" autoFocus value={description} onChange={(e) => setDescription(e.target.value)}></input><br></br>
 
+                <label for="image" class="login-label">Product Image</label>
+                <input name="image" id="image" type="text" class="login-text" autoFocus value={image} onChange={(e) => setImage(e.target.value)}></input><br></br>
+                
                 <button block size="lg" type="submit">Add</button>
                 <button block size="lg" style={ {marginLeft:'10px'} } onClick={handleUpdateProducts}>Update</button>
             </form><br></br>
