@@ -7,14 +7,14 @@ import ScrollToTopOnMount from "../template/ScrollToTopOnMount";
 
 const categories = [
   "All Products",
-  "Phones & Tablets",
-  "Cases & Covers",
-  "Screen Guards",
-  "Cables & Chargers",
-  "Power Banks",
+  "Clothing & Shoes",
+  "Electronics",
+  "Food & Gifts",
+  "Health & Beauty",
+  "Sports & Outdoors",
 ];
 
-const brands = ["Apple", "Samsung", "Google", "HTC"];
+const brands = ["Walmart", "Target", "Walgreen's", "ULTA"];
 
 const manufacturers = ["HOCO", "Nillkin", "Remax", "Baseus"];
 
@@ -133,7 +133,7 @@ function ProductList({products, setProducts}) {
             </Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
-            Cases &amp; Covers
+            Featured Products
           </li>
         </ol>
       </nav>

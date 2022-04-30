@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function ProductH(props) {
-  const price = 10000;
+  const price = props.product_price;
   let percentOff;
-  let offPrice = `${price}Ks`;
+  let offPrice = `$${price}`;
 
   if (props.percentOff && props.percentOff > 0) {
     percentOff = (
@@ -33,7 +33,7 @@ function ProductH(props) {
               <img
                 className="rounded-start bg-dark cover w-100 h-100"
                 alt=""
-                src={Image}
+                src={props.imagelink}
               />
             </Link>
           </div>
@@ -41,7 +41,7 @@ function ProductH(props) {
             <div className="card-body h-100">
               <div className="d-flex flex-column h-100">
                 <h5 className="card-title text-dark text-truncate mb-1">
-                  Nillkin iPhone X cover
+                  {props.product_name}
                 </h5>
                 <span className="card-text text-muted mb-2 flex-shrink-0">
                   {offPrice}
