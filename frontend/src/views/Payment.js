@@ -1,10 +1,10 @@
 // Raul Escobar
 import React, { useEffect, useState } from 'react'
 import { InputBox } from '../components/Input'
-import { OrderSummary } from '../components/OrderSummary'
 import { Select } from '../components/Select'
 import styled from 'styled-components'
 import { getFromStorage } from '../utils/localStorage'
+import { useNavigate  } from 'react-router-dom'
 
 
 const Main = styled.div`
@@ -31,7 +31,7 @@ const Row = styled.div`
     flex-direction: row;
     justify-content: space-around;
     border-radius: 10px;
-    border: 1px solid grey;
+    border: 1px solid lightgrey;
     margin-bottom: 1rem;
     padding: 1rem;
 `
@@ -41,11 +41,11 @@ const Button = styled.button`
 `
 const Col = styled.div`
     justify-content: space-around;
-    margin-bottom: 1rem;
-    padding: 1rem;
+    padding-right: 1rem;
 `
 
-export function Payment() {
+export function Payment({cart, setCart}) {
+    const navigate = useNavigate()
 
     const months = [1,2,3,4,5,6,7,8,9,10,11,12]
     const years = [22,23,24,25,26,27,28,29,30]
@@ -191,6 +191,10 @@ export function Payment() {
 
     }
 
+    const goToProducts = () => {
+        navigate('/products')
+    }
+
     return (
         <Main>
             {display===0 && 
@@ -229,7 +233,8 @@ export function Payment() {
                             
                         </>
                     }
-                    <Button onClick={addPayment}>Add one</Button>
+                    <Button onClick={addPayment}>Add payment method</Button>
+                    <Button onClick={goToProducts}>Go back to products</Button>
                 </div>
             </Column>}
             {display===1 && 
@@ -294,19 +299,46 @@ export function Payment() {
             </Column>}
             {display===3 && 
             <Column>
-                <div>Payment Method</div>
-                <div>
-                    <Row>
-                        <Col>{fname} {lname}</Col>
-                        <Col>{cardNum}</Col>
-                        <Col>{expMonth}/{expYear}</Col>
-                        <Col>{cardType}</Col>
-                    </Row>
-                </div>
+                <Row>
+                    <Column>
+                        <div>Payment Method</div>
+                        <div>
+                            <Row>
+                                <Col>{fname} {lname}</Col>
+                                <Col>{cardNum}</Col>
+                                <Col>{expMonth}/{expYear}</Col>
+                                <Col>{cardType}</Col>
+                            </Row>
+                        </div>
+                    </Column>
+                    <Column>
+                        <p>Cart</p>
+                        <Row>
+                            <Col><strong>Name</strong></Col>
+                            <Col><strong>Brand</strong></Col>
+                            <Col><strong>Description</strong></Col>
+                            <Col><strong>Price</strong></Col>
+                            <Col><strong>Quantity</strong></Col>
+                            <Col><strong>Edit</strong></Col>
+                        </Row>
+                        {cart.map(item => {
+                            return (
+                                <Row>
+                                    <Col>{item.product_name}</Col>
+                                    <Col>{item.product_brand}</Col>
+                                    <Col>{item.product_description}</Col>
+                                    <Col>{item.product_price}</Col>
+                                    <Col>{item.quantity}</Col>
+                                </Row>
+                                )
+                            })
+                        }
+                    </Column>
+                </Row>
                 <div>
                     <Button onClick={buyNow}>Buy Now</Button> 
                     <Button onClick={goBack}>Go Back</Button>
-                </div>
+                </div>                
             </Column>}
         </Main>
     )
