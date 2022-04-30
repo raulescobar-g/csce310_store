@@ -114,8 +114,8 @@ function ProductDetail(props) {
               <dt className="col-sm-4">Brand</dt>
               <dd className="col-sm-8 mb-3">{state.product_brand}</dd>
 
-              {/* <dt className="col-sm-4">Manufacturer</dt>
-              <dd className="col-sm-8 mb-3">Nillkin</dd> */}
+              <dt className="col-sm-4">Manufacturer</dt>
+              <dd className="col-sm-8 mb-3">{state.manufacturer}</dd>
 
               <dt className="col-sm-4">Color</dt>
               <dd className="col-sm-8 mb-3">Red, Green, Blue, Pink</dd>

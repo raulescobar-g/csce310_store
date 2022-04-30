@@ -16,6 +16,20 @@ router.get('/getproducts', async(req, res) => {
     }
 })
 
+// Returns 6 products for new arrivals on landing page
+router.get('/getnewproducts', async(req, res) => {
+    try {
+        console.log("Attempting to get products")
+
+        const products = await req.app.get('pool').query("SELECT * FROM product ORDER BY product_id DESC LIMIT 6")
+        console.log( products.rows )
+        res.json( products.rows )
+
+    } catch (e) {
+        console.log(e)
+    }
+})
+
 // Updates product in database
 router.post('/updateproduct', async(req, res) => {
     try {

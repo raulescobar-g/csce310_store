@@ -23,3 +23,6 @@ RENAME COLUMN promocode TO code;
 
 ALTER TABLE product
 ADD Manufacturer varchar(255);
+
+INSERT INTO product (product_name, product_description, product_price, product_brand, imagelink, manufacturer)
+ VALUES ('Lyndhurst Sofa', 'Create a stylish and elegantly calm environment in your home with the Lynhurst Sofa Collection from Threshold™', '448', 'Target', 'https://target.scene7.com/is/image/Target/GUEST_14d00438-35b1-4365-ab18-15ba6deb2438?wid=199&hei=199&qlt=80&fmt=pjpeg', 'Carousel')
