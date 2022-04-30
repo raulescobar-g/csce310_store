@@ -30,6 +30,20 @@ router.get('/getnewproducts', async(req, res) => {
     }
 })
 
+// Returns 4 random products for related products component
+router.get('/getrandomproducts', async(req, res) => {
+    try {
+        console.log("Attempting to get products")
+
+        const products = await req.app.get('pool').query("SELECT * FROM product ORDER BY RAND() LIMIT 4")
+        console.log( products.rows )
+        res.json( products.rows )
+
+    } catch (e) {
+        console.log(e)
+    }
+})
+
 // Updates product in database
 router.post('/updateproduct', async(req, res) => {
     try {

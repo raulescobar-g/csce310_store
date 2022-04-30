@@ -4,6 +4,7 @@ import RelatedProduct from "./RelatedProduct";
 import Ratings from "react-ratings-declarative";
 import { Link, useLocation } from "react-router-dom";
 import ScrollToTopOnMount from "../../template/ScrollToTopOnMount";
+import { useState, useEffect } from "react";
 
 const iconPath =
   "M18.571 7.221c0 0.201-0.145 0.391-0.29 0.536l-4.051 3.951 0.96 5.58c0.011 0.078 0.011 0.145 0.011 0.223 0 0.29-0.134 0.558-0.458 0.558-0.156 0-0.313-0.056-0.446-0.134l-5.011-2.634-5.011 2.634c-0.145 0.078-0.29 0.134-0.446 0.134-0.324 0-0.469-0.268-0.469-0.558 0-0.078 0.011-0.145 0.022-0.223l0.96-5.58-4.063-3.951c-0.134-0.145-0.279-0.335-0.279-0.536 0-0.335 0.346-0.469 0.625-0.513l5.603-0.815 2.511-5.078c0.1-0.212 0.29-0.458 0.547-0.458s0.446 0.246 0.547 0.458l2.511 5.078 5.603 0.815c0.268 0.045 0.625 0.179 0.625 0.513z";
@@ -11,6 +12,17 @@ const iconPath =
 function ProductDetail(props) {
   function changeRating(newRating) {}
   let state = useLocation().state;
+
+  const [state2, setState2] = useState({ items: [] });
+
+  useEffect( () => { 
+    fetch('http://localhost:5000/products/getproducts/')
+  .then(response => response.json())
+  .then(data => {
+    setState2({ 
+      items: data})
+      console.log(data)
+    }); }, [])
 
   return (
     <div className="container mt-5 py-4 px-xl-5">
@@ -162,9 +174,15 @@ function ProductDetail(props) {
           <hr />
           <h4 className="text-muted my-4">Related products</h4>
           <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
-            {Array.from({ length: 4 }, (_, i) => {
+            {/* {Array.from({ length: 4 }, (_, i) => {
               return (
                 <RelatedProduct key={i} percentOff={i % 2 === 0 ? 15 : null} />
+              );
+            })} */}
+
+            {state2.items.map((item) => {
+              return (
+                <RelatedProduct key={item.product_id} {...item} percentOff={item.product_id % 2 === 0 ? 15 : null} />
               );
             })}
           </div>

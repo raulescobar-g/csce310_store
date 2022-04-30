@@ -2,9 +2,9 @@ import Image from "../../nillkin-case-1.jpg";
 import { Link } from "react-router-dom";
 
 function RelatedProduct(props) {
-  const price = 10000;
+  const price = props.product_price;
   let percentOff;
-  let offPrice = `${price}Ks`;
+  let offPrice = `$${price}`;
 
   if (props.percentOff && props.percentOff > 0) {
     percentOff = (
@@ -18,7 +18,7 @@ function RelatedProduct(props) {
 
     offPrice = (
       <>
-        <del>{price}Ks</del> {price - (props.percentOff * price) / 100}Ks
+        <del>${price}</del> ${Math.round(price - (props.percentOff * price) / 100,2)}
       </>
     );
   }
@@ -36,11 +36,11 @@ function RelatedProduct(props) {
           className="card-img-top bg-dark cover"
           height="200"
           alt=""
-          src={Image}
+          src={props.imagelink}
         />
         <div className="card-body">
           <h5 className="card-title text-center text-dark text-truncate">
-            Nillkin iPhone X cover
+            {props.product_name}
           </h5>
           <p className="card-text text-center text-muted">{offPrice}</p>
         </div>
