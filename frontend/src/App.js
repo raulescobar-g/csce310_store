@@ -45,7 +45,7 @@ function App() {
           <Route path="/cart" element={<Cart cart={cart} setCart={setCart}/>} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/payment" element={<Payment />} />
+          <Route path="/payment" element={<Payment cart={cart} setCart={setCart}/>} />
           <Route path="/history" element={<History />} />
           <Route path="/account" element={<Account />} />
           <Route path="/manageinventory" element={<InventoryManager />} />

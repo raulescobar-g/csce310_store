@@ -85,7 +85,7 @@ export function Cart({cart, setCart}) {
                 )
             })
         }
-        <Button onClick={navToPay}>Buy</Button>
+        <Button onClick={navToPay}>Go to Payment</Button>
         </CartBox>
     )
 }
