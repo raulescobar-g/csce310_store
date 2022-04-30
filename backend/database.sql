@@ -20,3 +20,6 @@ VALUES ('ABCDEF', '15');
 
 ALTER TABLE discountcodes
 RENAME COLUMN promocode TO code;
+
+ALTER TABLE product
+ADD Manufacturer varchar(255);

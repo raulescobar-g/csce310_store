@@ -43,7 +43,7 @@ function ProductDetail(props) {
                     <img
                       className={"rounded mb-2 ratio " + selected}
                       alt=""
-                      src={Image}
+                      src={state.imagelink}
                     />
                   </a>
                 );
@@ -57,7 +57,7 @@ function ProductDetail(props) {
               <img
                 className="border rounded ratio ratio-1x1"
                 alt=""
-                src={Image}
+                src={state.imagelink}
               />
             </div>
           </div>

@@ -34,7 +34,7 @@ function Product(props) {
             className="card-img-top bg-dark cover"
             height="200"
             alt=""
-            src={Image}
+            src={props.imagelink}
           />
         </Link>
         <div className="card-body">
