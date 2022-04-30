@@ -63,6 +63,7 @@ export function Payment({cart, setCart}) {
     const [expYear, setExpYear] = useState()
     const [user_id, setUserId] = useState();
     const [paymentId, setPaymentId] = useState()
+    const [discount, setDiscount] = useState()
 
     const [display, setDisplay] = useState(0);
 
@@ -188,7 +189,9 @@ export function Payment({cart, setCart}) {
     }
 
     const buyNow = () => {
-
+        // clear cart
+        // add to payment history
+        //
     }
 
     const goToProducts = () => {
@@ -334,6 +337,9 @@ export function Payment({cart, setCart}) {
                             })
                         }
                     </Column>
+                </Row>
+                <Row>
+                    <InputBox id="discount" type="text" title="Discount Code" onChange={e => setDiscount(e.target.value)} value={discount}/>
                 </Row>
                 <div>
                     <Button onClick={buyNow}>Buy Now</Button> 
