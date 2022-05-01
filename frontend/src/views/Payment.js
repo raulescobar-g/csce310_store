@@ -46,9 +46,8 @@ const Col = styled.div`
 const Coly = styled.div`
     justify-content: space-around;
     padding-right: 1rem;
-    width:20%;y
+    width:20%;
 `
-
 export function Payment({cart, setCart}) {
     const navigate = useNavigate()
 
