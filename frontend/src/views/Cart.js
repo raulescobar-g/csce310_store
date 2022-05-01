@@ -7,6 +7,7 @@ const CartBox = styled.div`
     padding: 10rem;
 `
 const Col = styled.div`
+    width : 20%;
 `
 const Row = styled.div`
     display: flex;
@@ -67,7 +68,6 @@ export function Cart({cart, setCart}) {
             <Row>
                 <Col><strong>Name</strong></Col>
                 <Col><strong>Brand</strong></Col>
-                <Col><strong>Description</strong></Col>
                 <Col><strong>Price</strong></Col>
                 <Col><strong>Quantity</strong></Col>
                 <Col><strong>Edit</strong></Col>
@@ -77,7 +77,6 @@ export function Cart({cart, setCart}) {
                     <Row>
                         <Col>{item.product_name}</Col>
                         <Col>{item.product_brand}</Col>
-                        <Col>{item.product_description}</Col>
                         <Col>{item.product_price}</Col>
                         <Col>{item.quantity}</Col>
                         <Col><Button id={item.product_id} onClick={onMinus}>-</Button><Button id={item.product_id} onClick={onPlus}>+</Button></Col>

@@ -97,7 +97,7 @@ function FilterMenuLeft() {
   );
 }
 
-function ProductList({products, setProducts}) {
+function ProductList({state, setState, setCart, cart}) {
   const [viewType, setViewType] = useState({ grid: true });
 
 
@@ -107,16 +107,14 @@ function ProductList({products, setProducts}) {
     });
   }
 
-  const [state, setState] = useState({ items: [] });
-
-  useEffect( () => { 
+  useEffect(() => {
     fetch('http://localhost:5000/products/getproducts/')
-  .then(response => response.json())
-  .then(data => {
-    setState({ 
-      items: data})
-      console.log(data)
-    }); }, [])
+      .then(response => response.json())
+      .then(data => {
+        setState({ 
+          items: data})
+        })
+  },[])
 
   return (
     <div className="container mt-5 py-4 px-xl-5">
@@ -248,11 +246,11 @@ function ProductList({products, setProducts}) {
               {state.items.map((item) => {
                 if (viewType.grid) {
                   return (
-                    <Product key={item.product_id} {...item} percentOff={null} />
+                    <Product key={item.product_id} {...item} percentOff={null} setCart={setCart} cart={cart}/>
                   );
                 }
                 return (
-                  <ProductH key={item.product_id} {...item} percentOff={null} />
+                  <ProductH key={item.product_id} {...item} percentOff={null} setCart={setCart} cart={cart}/>
                 );
               })}
             </div>

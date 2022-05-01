@@ -8,7 +8,6 @@ const bodyParser = require('body-parser')
 const paymentRouter = require('./routes/payments.js')
 const userRouter = require('./routes/users')
 const productRouter = require('./routes/products.js')
-const warehouseRouter = require('./routes/warehouses.js')
 const discountRouter = require('./routes/discounts')
 const cartRouter = require('./routes/carts.js')
 const storeRouter = require('./routes/stores.js')
@@ -50,7 +49,6 @@ app.use('/products', require('./routes/products'));
 app.use('/users', userRouter);
 app.use('/payments', paymentRouter);
 app.use('/products', productRouter);
-app.use('/warehouses',warehouseRouter);
 app.use('/discounts', discountRouter);
 app.use('/carts', cartRouter)
 app.use('/stores', storeRouter);
