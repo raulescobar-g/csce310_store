@@ -22,15 +22,22 @@ import { getFromStorage } from './utils/localStorage'
 
 function App() {
   const [cart, setCart] = useState([]);
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState({ items: [] })
 
   useEffect(() => {
-    // const user_id = getFromStorage('user_id')
-    // fetch(`http://localhost:5000/carts/${user_id}`)
-    // .then(response => response.json())
-    // .then(data => {
-    //   setCart(data.cart)}
-    // )
+    const user_id = getFromStorage('user_id')
+    fetch(`http://localhost:5000/carts/${user_id}`)
+    .then(response => response.json())
+    .then(data => {
+      setCart(data.cart)}
+    )
+
+    fetch('http://localhost:5000/products/getproducts/')
+      .then(response => response.json())
+      .then(data => {
+        setProducts({ 
+          items: data})
+        })
   },[])
 
   return (
@@ -38,8 +45,8 @@ function App() {
       <Template cart={cart} setCart={setCart}>
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/products" element={<ProductList products={products} setProducts={setProducts}/>} />
-          <Route path="/products/:slug" element={<ProductDetail />} />
+          <Route path="/products" element={<ProductList state={products} setState={setProducts} setCart={setCart} cart={cart}/>} />
+          <Route path="/products/:slug" element={<ProductDetail cart={cart} setCart={setCart}/>} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/store" element={<Store />} />
           <Route path="/cart" element={<Cart cart={cart} setCart={setCart}/>} />

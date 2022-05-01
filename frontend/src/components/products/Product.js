@@ -2,11 +2,14 @@
 import Image from "./no_image.webp";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getFromStorage } from "../../utils/localStorage";
 
 function Product(props) {
   const price = props.product_price;
+  const { setCart, cart } = props 
   let percentOff;
   let offPrice = `$${price}`;
+  
 
   if (props.percentOff && props.percentOff > 0) {
     percentOff = (
@@ -23,6 +26,27 @@ function Product(props) {
         <del>{price}Ks</del> {price - (props.percentOff * price) / 100}Ks
       </>
     );
+  }
+
+  const addToCart = async (e) => {
+    const user_id = getFromStorage('user_id')
+
+    const data = {
+      "user_id": user_id,
+      "product_id": e.target.id
+    }
+    
+    const options = {
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(data)
+  }
+    const new_cart = await fetch('http://localhost:5000/carts/', options)
+    const jsoned = await new_cart.json()
+    setCart(jsoned.cart)
+
   }
 
   return (
@@ -43,7 +67,7 @@ function Product(props) {
           </h5>
           <p className="card-text text-center text-muted mb-0">{offPrice}</p>
           <div className="d-grid d-block">
-            <button className="btn btn-outline-dark mt-3">
+            <button id={props.product_id} onClick={addToCart} className="btn btn-outline-dark mt-3">
               <FontAwesomeIcon icon={["fas", "cart-plus"]} /> Add to cart
             </button>
           </div>

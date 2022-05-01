@@ -43,6 +43,11 @@ const Col = styled.div`
     justify-content: space-around;
     padding-right: 1rem;
 `
+const Coly = styled.div`
+    justify-content: space-around;
+    padding-right: 1rem;
+    width:20%;y
+`
 
 export function Payment({cart, setCart}) {
     const navigate = useNavigate()
@@ -188,7 +193,13 @@ export function Payment({cart, setCart}) {
         setPaymentId(editPm.payment_id)
     }
 
-    const buyNow = () => {
+    const buyNow = async () => {
+        const options = {
+            method: 'DELETE',
+        }
+
+
+        // const _ = await fetch(`http://localhost:5000/payment_history/`, options);
         // clear cart
         // add to payment history
         //
@@ -212,7 +223,7 @@ export function Payment({cart, setCart}) {
                                 <Col>Card Number</Col>
                                 <Col>Card Expiration Date</Col>
                                 <Col>Card Type</Col>
-                                <Col>Edit/Delete</Col>
+                                <Col>Edit/Delete/Select</Col>
                             </Row>
                         
                             {paymentMethods.map(paymeth => {
@@ -317,21 +328,19 @@ export function Payment({cart, setCart}) {
                     <Column>
                         <p>Cart</p>
                         <Row>
-                            <Col><strong>Name</strong></Col>
-                            <Col><strong>Brand</strong></Col>
-                            <Col><strong>Description</strong></Col>
-                            <Col><strong>Price</strong></Col>
-                            <Col><strong>Quantity</strong></Col>
-                            <Col><strong>Edit</strong></Col>
+                            <Coly><strong>Name</strong></Coly>
+                            <Coly><strong>Brand</strong></Coly>
+                            <Coly><strong>Price</strong></Coly>
+                            <Coly><strong>Quantity</strong></Coly>
+                            <Coly><strong>Edit</strong></Coly>
                         </Row>
                         {cart.map(item => {
                             return (
                                 <Row>
-                                    <Col>{item.product_name}</Col>
-                                    <Col>{item.product_brand}</Col>
-                                    <Col>{item.product_description}</Col>
-                                    <Col>{item.product_price}</Col>
-                                    <Col>{item.quantity}</Col>
+                                    <Coly>{item.product_name}</Coly>
+                                    <Coly>{item.product_brand}</Coly>
+                                    <Coly>{item.product_price}</Coly>
+                                    <Coly>{item.quantity}</Coly>
                                 </Row>
                                 )
                             })

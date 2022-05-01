@@ -3,9 +3,11 @@ const express = require('express')
 const router = express.Router()
 
 /**
- * Receives POST requests from frontend with new payment method in body
- * If missing value will return 400 status
- * else will insert into bd and on success returns 200 status
+ * Receives POST requests from frontend with new payment method in body and user_id
+ * If missing value 
+ *      will return 400 status
+ * else 
+ *      inserts payment method with reference to user_id, returns 200 status code on success
  */
 router.post('/', async (req, res) => {
     try {
@@ -27,9 +29,11 @@ router.post('/', async (req, res) => {
 
 
 /**
- * Receives GET requests from frontend with user_id in body
- * If missing value will return 400 status
- * else will query for payment methods associated to user and returns that array
+ * Receives GET requests from frontend with user_id as url parameter
+ * If missing value 
+ *      will return 400 status
+ * else 
+ *      will query for payment methods associated to user and returns that array
  */
 router.get('/:user_id', async (req, res) => {
     try {
@@ -45,8 +49,15 @@ router.get('/:user_id', async (req, res) => {
 
 /**
  * Receives DELETE requests from frontend with payment_id
- * If missing value will return 400 status
- * else will delete from database, if nothing was deleted its because nothing was there and returns 400 else returns 200 status
+ * If missing value 
+ *      will return 400 status
+ * else 
+ *      will delete payment method matching unique payment_id, 
+ *      
+ *      if nothing was deleted its because nothing was there
+ *          returns 400 
+ *      else 
+ *          returns 200 status
  */
 router.delete('/', async (req, res) => {
     try {
@@ -71,8 +82,10 @@ router.delete('/', async (req, res) => {
 
 /**
  * Receives PUT requests from frontend with values
- * If missing value will return 400 status
- * else will update row with new values
+ * If missing value 
+ *      will return 400 status
+ * else 
+ *      will update row with new values
  */
 router.put('/', async (req, res) => {
     try {

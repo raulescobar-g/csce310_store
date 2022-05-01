@@ -1,11 +1,34 @@
 import Image from "../nillkin-case-1.jpg";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getFromStorage } from "../../utils/localStorage";
 
 function ProductH(props) {
   const price = props.product_price;
+  const { setCart, cart } = props 
   let percentOff;
   let offPrice = `$${price}`;
+
+  const addToCart = async (e) => {
+    const user_id = getFromStorage('user_id')
+
+    const data = {
+      "user_id": user_id,
+      "product_id": e.target.id
+    }
+    
+    const options = {
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(data)
+  }
+    const new_cart = await fetch('http://localhost:5000/carts/', options)
+    const jsoned = await new_cart.json()
+    setCart(jsoned.cart)
+
+  }
 
   if (props.percentOff && props.percentOff > 0) {
     percentOff = (
@@ -47,7 +70,7 @@ function ProductH(props) {
                   {offPrice}
                 </span>
                 <div className="mt-auto d-flex">
-                  <button className="btn btn-outline-dark ms-auto">
+                  <button id={props.product_id} className="btn btn-outline-dark ms-auto" onClick={addToCart}>
                     <FontAwesomeIcon icon={["fas", "cart-plus"]} /> Add to cart
                   </button>
                 </div>
