@@ -23,7 +23,7 @@ function Product(props) {
 
     offPrice = (
       <>
-        <del>{price}Ks</del> {price - (props.percentOff * price) / 100}Ks
+        <del>${price}</del> ${price - (props.percentOff * price) / 100}
       </>
     );
   }

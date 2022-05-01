@@ -5,6 +5,7 @@ import Ratings from "react-ratings-declarative";
 import { Link, useParams } from "react-router-dom";
 import ScrollToTopOnMount from "../../template/ScrollToTopOnMount";
 import { useState, useEffect } from "react";
+import ReviewList from "../../reviews/ReviewList";
 import { getFromStorage } from "../../../utils/localStorage";
 
 const iconPath =
@@ -21,6 +22,7 @@ function ProductDetail(props) {
   const { slug } = useParams();
 
   useEffect( () => { 
+<<<<<<< HEAD
     fetch('http://localhost:5000/products/getproducts/')
       .then(response => response.json())
       .then(_data => {
@@ -31,6 +33,15 @@ function ProductDetail(props) {
       
 
   }, [])
+=======
+    fetch('http://localhost:5000/products/getrandomproducts/')
+  .then(response => response.json())
+  .then(data => {
+    setState2({ 
+      items: data})
+      console.log(data)
+    }); }, [])
+>>>>>>> 866451205c410762ce065f02984a0a0480c302ca
 
     const addToCart = async (e) => {
       const user_id = getFromStorage('user_id')
@@ -216,6 +227,9 @@ function ProductDetail(props) {
             })}
           </div>
         </div>
+      </div>
+      <div>
+        <ReviewList key={state.product_id} props={state.product_id}/>
       </div>
     </div>
   );

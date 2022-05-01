@@ -35,7 +35,7 @@ router.get('/getrandomproducts', async(req, res) => {
     try {
         console.log("Attempting to get products")
 
-        const products = await req.app.get('pool').query("SELECT * FROM product ORDER BY RAND() LIMIT 4")
+        const products = await req.app.get('pool').query("SELECT * FROM product ORDER BY RANDOM() LIMIT 4")
         console.log( products.rows )
         res.json( products.rows )
 
