@@ -2,7 +2,7 @@
 import Image from "../no_image.webp";
 import RelatedProduct from "./RelatedProduct";
 import Ratings from "react-ratings-declarative";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ScrollToTopOnMount from "../../template/ScrollToTopOnMount";
 import { useState, useEffect } from "react";
 import { getFromStorage } from "../../../utils/localStorage";
@@ -12,19 +12,25 @@ const iconPath =
 
 function ProductDetail(props) {
   function changeRating(newRating) {}
-  let state = useLocation().state;
+  
   const { cart, setCart } = props
 
   const [state2, setState2] = useState({ items: [] });
+  const [state, setState] = useState({});
+
+  const { slug } = useParams();
 
   useEffect( () => { 
     fetch('http://localhost:5000/products/getproducts/')
-  .then(response => response.json())
-  .then(data => {
-    setState2({ 
-      items: data})
-      console.log(data)
-    }); }, [])
+      .then(response => response.json())
+      .then(_data => {
+        setState2({ items: _data})
+        setState(_data.find(p => p.product_id == slug))
+      }); 
+
+      
+
+  }, [])
 
     const addToCart = async (e) => {
       const user_id = getFromStorage('user_id')
@@ -63,7 +69,7 @@ function ProductDetail(props) {
             </a>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
-            {state.product_name}
+            {state?.product_name}
           </li>
         </ol>
       </nav>
@@ -78,7 +84,7 @@ function ProductDetail(props) {
                     <img
                       className={"rounded mb-2 ratio " + selected}
                       alt=""
-                      src={state.imagelink}
+                      src={state?.imagelink}
                     />
                   </a>
                 );
@@ -92,7 +98,7 @@ function ProductDetail(props) {
               <img
                 className="border rounded ratio ratio-1x1"
                 alt=""
-                src={state.imagelink}
+                src={state?.imagelink}
               />
             </div>
           </div>
@@ -123,12 +129,12 @@ function ProductDetail(props) {
 
         <div className="col-lg-5">
           <div className="d-flex flex-column h-100">
-            <h2 className="mb-1">{state.product_name}</h2>
-            <h4 className="text-muted mb-4">${state.product_price}</h4>
+            <h2 className="mb-1">{state?.product_name}</h2>
+            <h4 className="text-muted mb-4">${state?.product_price}</h4>
 
             <div className="row g-3 mb-4">
               <div className="col">
-                <button id={state.product_id} className="btn btn-outline-dark py-2 w-100" onClick={addToCart}>
+                <button id={state?.product_id} className="btn btn-outline-dark py-2 w-100" onClick={addToCart}>
                   Add to cart
                 </button>
               </div>
@@ -141,16 +147,16 @@ function ProductDetail(props) {
             <hr />
             <dl className="row">
               <dt className="col-sm-4">Product Id</dt>
-              <dd className="col-sm-8 mb-3">{state.product_id}</dd>
+              <dd className="col-sm-8 mb-3">{state?.product_id}</dd>
 
               {/* <dt className="col-sm-4">Category</dt>
               <dd className="col-sm-8 mb-3">Cases & Covers</dd> */}
 
               <dt className="col-sm-4">Brand</dt>
-              <dd className="col-sm-8 mb-3">{state.product_brand}</dd>
+              <dd className="col-sm-8 mb-3">{state?.product_brand}</dd>
 
               <dt className="col-sm-4">Manufacturer</dt>
-              <dd className="col-sm-8 mb-3">{state.manufacturer}</dd>
+              <dd className="col-sm-8 mb-3">{state?.manufacturer}</dd>
 
               <dt className="col-sm-4">Color</dt>
               <dd className="col-sm-8 mb-3">Red, Green, Blue, Pink</dd>
@@ -185,7 +191,7 @@ function ProductDetail(props) {
             <hr />
             <p className="lead flex-shrink-0">
               <small>
-                {state.product_description}
+                {state?.product_description}
               </small>
             </p>
           </div>

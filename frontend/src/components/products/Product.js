@@ -42,7 +42,7 @@ function Product(props) {
       },
       method: 'POST',
       body: JSON.stringify(data)
-  }
+    }
     const new_cart = await fetch('http://localhost:5000/carts/', options)
     const jsoned = await new_cart.json()
     setCart(jsoned.cart)
@@ -52,7 +52,7 @@ function Product(props) {
   return (
     <div className="col">
       <div className="card shadow-sm">
-        <Link to={`/products/${props.product_id}`} state={props} href="!#" replace>
+        <Link to={`/products/${props.product_id}`} href="!#" replace>
           {percentOff}
           <img
             className="card-img-top bg-dark cover"

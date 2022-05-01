@@ -193,15 +193,16 @@ export function Payment({cart, setCart}) {
     }
 
     const buyNow = async () => {
+        const data = {}
         const options = {
-            method: 'DELETE',
+            method: 'POST',
+            body: JSON.stringify(data)
         }
 
 
         // const _ = await fetch(`http://localhost:5000/payment_history/`, options);
         // clear cart
         // add to payment history
-        //
     }
 
     const goToProducts = () => {
