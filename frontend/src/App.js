@@ -17,12 +17,13 @@ import "./App.css";
 import { InventoryManager } from "./views/InventoryManager";
 import { StoreLocations } from "./views/StoreLocations";
 
-import { getFromStorage } from './utils/localStorage'
-
+import { getFromStorage, saveToStorage } from './utils/localStorage'
 
 function App() {
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState({ items: [] })
+  
+  saveToStorage(null, 'user_id')
 
   useEffect(() => {
     const user_id = getFromStorage('user_id')

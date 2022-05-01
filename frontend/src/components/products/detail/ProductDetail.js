@@ -22,8 +22,7 @@ function ProductDetail(props) {
   const { slug } = useParams();
 
   useEffect( () => { 
-<<<<<<< HEAD
-    fetch('http://localhost:5000/products/getproducts/')
+    fetch('http://localhost:5000/products/getrandomproducts/')
       .then(response => response.json())
       .then(_data => {
         setState2({ items: _data})
@@ -33,15 +32,6 @@ function ProductDetail(props) {
       
 
   }, [])
-=======
-    fetch('http://localhost:5000/products/getrandomproducts/')
-  .then(response => response.json())
-  .then(data => {
-    setState2({ 
-      items: data})
-      console.log(data)
-    }); }, [])
->>>>>>> 866451205c410762ce065f02984a0a0480c302ca
 
     const addToCart = async (e) => {
       const user_id = getFromStorage('user_id')
