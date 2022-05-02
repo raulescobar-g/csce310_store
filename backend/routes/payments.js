@@ -2,8 +2,9 @@
 const express = require('express')
 const router = express.Router()
 
-/**
+/** Raul Escobar
  * Receives POST requests from frontend with new payment method in body and user_id
+ * 
  * If missing value 
  *      will return 400 status
  * else 
@@ -28,8 +29,9 @@ router.post('/', async (req, res) => {
 })
 
 
-/**
+/** Raul Escobar
  * Receives GET requests from frontend with user_id as url parameter
+ * 
  * If missing value 
  *      will return 400 status
  * else 
@@ -47,8 +49,9 @@ router.get('/:user_id', async (req, res) => {
 })
 
 
-/**
+/** Raul Escobar
  * Receives DELETE requests from frontend with payment_id
+ * 
  * If missing value 
  *      will return 400 status
  * else 
@@ -80,12 +83,13 @@ router.delete('/', async (req, res) => {
 })
 
 
-/**
+/** Raul Escobar
  * Receives PUT requests from frontend with values
+ * 
  * If missing value 
  *      will return 400 status
  * else 
- *      will update row with new values
+ *      will update row with new values provided
  */
 router.put('/', async (req, res) => {
     try {

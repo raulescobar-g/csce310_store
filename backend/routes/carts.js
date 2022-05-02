@@ -2,24 +2,24 @@
 const express = require('express')
 const router = express.Router()
 
-/**
+/** Raul Escobar
  * Receives POST requests from frontend with user_id and product_id
+ * 
  * If missing value 
  *      will return 400 status
  * else 
- *      will insert product into cart linked to user and with a quantity
+ *      queries for product in cart
+ * 
+ *      if product not in cart, 
+ *          then insert it into cart
+ *      else
+ *           add 1 to the quantity
  *      
- *      if row inserted
- *          then return 200 
- *      else 
- *          return 400
  */
 router.post('/', async (req, res) => {
     try {
         
         const { user_id, product_id } = req.body
-        console.log(user_id)
-        console.log(product_id)
         if (!user_id || !product_id) {
             res.sendStatus(400)
             return
@@ -28,10 +28,10 @@ router.post('/', async (req, res) => {
         const cart_item = await req.app.get('pool').query("SELECT * FROM cart WHERE product_id=$1 AND user_id=$2;", [product_id, user_id])
         
         if (cart_item.rows.length === 0){
-            const result = await req.app.get('pool').query("INSERT INTO cart (user_id,product_id,quantity) VALUES ($1, $2, 1);", [user_id, product_id])
+            const _ = await req.app.get('pool').query("INSERT INTO cart (user_id,product_id,quantity) VALUES ($1, $2, 1);", [user_id, product_id])
             
         } else {
-            const resulty = await req.app.get('pool').query('UPDATE cart SET quantity=$3 WHERE user_id=$2 AND product_id=$1;', [product_id,user_id, cart_item.rows[0].quantity+1])
+            const __ = await req.app.get('pool').query('UPDATE cart SET quantity=$3 WHERE user_id=$2 AND product_id=$1;', [product_id,user_id, cart_item.rows[0].quantity+1])
         }
 
         const cart_arr = await req.app.get('pool').query("SELECT product.product_id, product_name, product_description, product_price, product_brand,quantity FROM cart JOIN product ON cart.product_id=product.product_id where user_id=$1", [user_id])
@@ -45,9 +45,11 @@ router.post('/', async (req, res) => {
 })
 
 
-/**
+/** Raul Escobar
  * Receives GET requests from frontend with user_id in url 
- * joins cart with product on product_id and returns list items that are not bought and that correspond to user_id
+ * 
+ * joins cart with product on product_id 
+ * returns list of product info that correspond to user_id in cart
  * 
  */
 router.get('/:user_id', async (req, res) => {
@@ -63,8 +65,9 @@ router.get('/:user_id', async (req, res) => {
 })
 
 
-/**
+/** Raul Escobar
  * Receives DELETE requests from frontend with payment_id
+ * 
  * If missing value 
  *      will return 400 status
  * else 
@@ -96,12 +99,18 @@ router.delete('/:user_id', async (req, res) => {
 })
 
 
-/**
- * Receives PUT requests from frontend with cart values
+/** Raul Escobar
+ * Receives PUT requests from frontend user_id , product_id and quantity
+ * 
  * query for item in cart that we want to modify
- * if user wants to delete 1 item with quanity 1, then we delete the item
- * if user wants to delete 1 item with quantity greater than 1, then we update the item by decrementing the item quantity
- * is user wants to add 1 item , then we simply increment the quantity of that item
+ * if user wants to delete 1 item with quanity 1, 
+ *      then we delete the item
+ * 
+ * if user wants to delete 1 item with quantity greater than 1, 
+ *      then we update the item by decrementing the item quantity
+ * 
+ * is user wants to add 1 item , 
+ *      then we simply increment the quantity of that item
  */
 router.put('/', async (req, res) => {
     try {

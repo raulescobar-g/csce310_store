@@ -28,7 +28,7 @@ function App() {
     fetch(`http://localhost:5000/carts/${user_id}`)
     .then(response => response.json())
     .then(data => {
-      setCart(data.cart)}
+      setCart(data?.cart)}
     )
 
     fetch('http://localhost:5000/products/getproducts/')

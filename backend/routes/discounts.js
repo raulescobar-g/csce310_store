@@ -25,6 +25,7 @@ router.get('/getdiscounts', async(req, res) => {
         console.log(error)
     }
 })
+
   
 // get a discount
 router.get('/getdiscount/:id', async(req, res) => {
