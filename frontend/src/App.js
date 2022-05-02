@@ -14,6 +14,7 @@ import ProductList from "./components/products/ProductList";
 import Settings from "./components/Settings";
 import OrderList from "./components/orders/OrderList";
 import OrderDetail from "./components/orders/detail/OrderDetail";
+import {HistoryManager} from "./views/HistoryManager";
 
 import "./App.css";
 import { InventoryManager } from "./views/InventoryManager";
@@ -61,7 +62,7 @@ function App() {
           <Route path="/account" element={<Account />} />
           <Route path="/manageinventory" element={<InventoryManager />} />
           <Route path="/stores" element={<StoreLocations />} />
-          <Route path="/managehistory" element={<HistoryManager state={orders} setState={setOrders} setOrder={setOrder} order={order}/>} />
+          <Route path="/managehistory" element={<HistoryManager />} />
         </Routes>
       </Template>
     </div>
