@@ -69,14 +69,19 @@ export function InventoryManager() {
         .then((res) => res.json())
         .then((data) => {
             var list = document.getElementById("listOfInventory");
-            list.innerHTML = ''
+            list.innerHTML = ""
             for (var i in data) {
-                var anchor = document.createElement("li");
-                anchor.innerHTML = data[i].product_id + ": " + data[i].product_name + "; $" + data[i].product_price + "; " + data[i].product_brand + "; " + data[i].manufacturer + "; " + data[i].product_description + "; " + data[i].imagelink
+                var anchor = document.createElement("tr")
+                anchor.innerHTML = "<td>"+data[i].product_id+"</td><td>"+data[i].product_name+"</td><td>$"+data[i].product_price+"</td><td>"+data[i].product_brand+"</td><td>"+data[i].manufacturer+"</td><td>"+data[i].product_description+"</td><td>"+data[i].imagelink+"</td>" 
                 list.appendChild(anchor);
             }
         })
 
+    }
+
+    function handleEdit(elem) {
+        console.log("Edit clicked");        
+        setName( elem.parentNode.children[1].innerHTML )
     }
     
     // Deletes product from database
@@ -130,8 +135,23 @@ export function InventoryManager() {
             </form>
 
             <p>List of all inventory</p>
-            <ul id="listOfInventory" style={{listStyle:'none'}}>
-            </ul>
+            {/* <ul id="listOfInventory" style={{listStyle:'none'}}>
+            </ul> */}
+            <table class="table">
+                <tr>
+                    <th>Item ID</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Brand</th>
+                    <th>Manufacturer</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th> </th>
+                </tr>
+                <tbody id="listOfInventory">
+
+                </tbody>
+            </table>
         </div>
     )
 }
