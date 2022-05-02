@@ -75,9 +75,9 @@ router.get('/:user_id', async (req, res) => {
  *      else 
  *          returns 200 status
  */
-router.delete('/', async (req, res) => {
+router.delete('/:user_id', async (req, res) => {
     try {
-        const { user_id } = req.body
+        const user_id = req.params.user_id
         if (!user_id) {
             res.sendStatus(400)
             return

@@ -201,9 +201,9 @@ export function Payment({cart, setCart}) {
         }
 
 
-        // const _ = await fetch(`http://localhost:5000/payment_history/`, options);
-        // clear cart
-        // add to payment history
+        const _ = await fetch(`http://localhost:5000/history/`, options);
+
+        const __ = await fetch(`http://localhost:5000/carts/${user_id}`, {method:"DELETE"})
     }
 
     const goToProducts = () => {

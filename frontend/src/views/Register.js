@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
+import { useNavigate } from 'react-router-dom'
 
 // Written by Zeeshan V
 export function Register() {
+    const nav = useNavigate()
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [fname, setFName] = useState("");
@@ -20,13 +22,16 @@ export function Register() {
                         lname: document.getElementById("lname").value,
                         email: document.getElementById("email").value,
                         password:  document.getElementById("password").value }
-        alert("Trying" + data.username + data.password);
+        
         fetch("http://localhost:5000/users/tryregister", {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(data)
         })
         .then((data) => {
+            console.log(data)
+            alert("registered")
+            nav('/login')
             
         })
         .catch(res=>{
