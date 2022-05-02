@@ -72,7 +72,7 @@ export function InventoryManager() {
             list.innerHTML = ''
             for (var i in data) {
                 var anchor = document.createElement("li");
-                anchor.innerHTML = data[i].product_id + ": " + data[i].product_name + "; $" + data[i].product_price + "; " + data[i].product_brand + "; " + data[i].manufacturer + "; " + data[i].product_description + "; " + data[i].imagelink
+                anchor.innerHTML = data[i].product_id + ": " + data[i].product_name + "; $" + data[i].product_price + "; " + data[i].product_brand + "; " + data[i].manufacturer
                 list.appendChild(anchor);
             }
         })
