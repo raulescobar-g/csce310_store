@@ -18,27 +18,25 @@ function ProductDetail(props) {
 
   const [state2, setState2] = useState({ items: [] });
   const [state, setState] = useState({});
+  const [user_id, setUserId] = useState();
 
   const { slug } = useParams();
 
   useEffect( () => { 
-    fetch('http://localhost:5000/products/getrandomproducts/')
+    fetch('http://localhost:5000/products/getproducts/')
       .then(response => response.json())
       .then(_data => {
         setState2({ items: _data})
         setState(_data.find(p => p.product_id == slug))
       }); 
-
-      
-
+      setUserId(getFromStorage('user_id'))
   }, [])
 
     const addToCart = async (e) => {
-      const user_id = getFromStorage('user_id')
   
       const data = {
         "user_id": user_id,
-        "product_id": e.target.id
+        "product_id": slug
       }
       
       const options = {
@@ -50,6 +48,7 @@ function ProductDetail(props) {
     }
       const new_cart = await fetch('http://localhost:5000/carts/', options)
       const jsoned = await new_cart.json()
+      console.log(jsoned)
       setCart(jsoned.cart)
   
     }

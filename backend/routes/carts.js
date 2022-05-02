@@ -16,11 +16,15 @@ const router = express.Router()
  */
 router.post('/', async (req, res) => {
     try {
+        
         const { user_id, product_id } = req.body
+        console.log(user_id)
+        console.log(product_id)
         if (!user_id || !product_id) {
             res.sendStatus(400)
             return
         }
+        
         const cart_item = await req.app.get('pool').query("SELECT * FROM cart WHERE product_id=$1 AND user_id=$2;", [product_id, user_id])
         
         if (cart_item.rows.length === 0){
