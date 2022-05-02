@@ -3,7 +3,7 @@ const express = require('express')
 const router = express.Router()
 
 /**
- * Receives POST requests from frontend with user_id and product_id
+ * Receives POST requests from frontend 
  * If missing value will return 400 status
  * else will insert into db and if row inserted, then return 200 else return 400
  */
@@ -32,7 +32,7 @@ router.post('/addorder', async (req, res) => {
 
 
 /**
- * Receives GET requests from frontend with user_id in body
+ * Receives GET requests from frontend 
  * joins order_history with cart on product_id and returns list items
  * If missing value will return 400 status
  * else will query for payment methods associated to user and returns that array
@@ -52,7 +52,7 @@ router.get('/', async (req, res) => {
 
 
 /**
- * Receives DELETE requests from frontend with payment_id
+ * Receives DELETE requests from frontend 
  * If missing value will return 400 status
  * else will delete from database, if nothing was deleted its because nothing was there and returns 400 else returns 200 status
  */

@@ -76,8 +76,8 @@ export function InventoryManager() {
                 
                 var btn = document.createElement("button");
                 btn.className = "btn btn-primary";
-                btn.id = data[i].product_id+"-edit"
                 btn.innerHTML = "Edit";
+                btn.style = "padding-top: 5px; padding-bottom: 5px; background-color: #212529;"
 
                 btn.addEventListener("click", function(e) { handleEdit( e.target ) });
 

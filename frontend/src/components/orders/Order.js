@@ -1,3 +1,5 @@
+//Kara Capps
+
 import Image from "../nillkin-case-1.jpg";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,7 +10,7 @@ function Order(order, setOrder) {
   const nav = useNavigate()
   console.log(order)
   
-  //need order number, userID, ProductID, PaymentID
+  //need historyID, userID, ProductID, PaymentID
   const updateOrder = async (e, amount) => {
     try{
         const user_id = getFromStorage('user_id');

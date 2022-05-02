@@ -29,6 +29,7 @@ export function Login() {
             saveToStorage(info?.user_id, 'user_id')
             saveToStorage(info?.firstname, 'firstname')
             nav('/')
+            window.location.reload();
         } else {
             alert("Failed to login")
         }
