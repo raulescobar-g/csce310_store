@@ -12,24 +12,20 @@ export function Login() {
     }
 
     // Calls backend to attempt a login with the filled email and password
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
         
         const data = { username: document.getElementById("username").value,
                         password:  document.getElementById("password").value }
         alert("Trying" + data.username + data.password);
-        fetch("http://localhost:5000/users/trylogin", {
+        const res = await fetch("http://localhost:5000/users/trylogin", {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(data)
         })
-        .then((data) => {
-            console.log(data)
-            saveToStorage(data.user_id, 'user_id')
-        })
-        .catch(res=>{
-            console.log("Exception : ",res);
-        })
+        const user_id = await res.json()
+        saveToStorage(user_id.user_id, 'user_id')
+        
     }
 
     // Frontend for Login page
