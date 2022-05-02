@@ -94,7 +94,7 @@ export function StoreLocations() {
     // Frontend for Store Management
     return (
         <div className="storeManagement" style={{marginTop:'56px', marginBottom:'10px'}}>
-            <button size="lg" type="button" style={{marginTop:'15px'}} onClick={handleGetStores}>Get all Stores</button><br></br>
+            <button className='btn btn-primary' size="lg" type="button" style={{marginTop:'15px'}} onClick={handleGetStores}>Get all Stores</button><br></br>
             <br></br>           
             <p style={{paddingTop:'5px'}}>Add a new store or Update an existing store</p>
             <form onSubmit={handleAddStore}>
@@ -110,8 +110,8 @@ export function StoreLocations() {
                 <label for="zip" class="login-label">Zip</label>
                 <input name="zip" id="zip" type="text" class="login-text" autoFocus value={storeZip} onChange={(e) => setZip(e.target.value)}></input><br></br>
 
-                <button block size="lg" type="submit">Add</button>
-                <button block size="lg" style={ {marginLeft:'10px'} } onClick={handleUpdateStore}>Update</button>
+                <button className='btn btn-primary' block size="lg" type="submit">Add</button>
+                <button className='btn btn-primary' block size="lg" style={ {marginLeft:'10px'} } onClick={handleUpdateStore}>Update</button>
             </form><br></br>
 
             
@@ -119,7 +119,7 @@ export function StoreLocations() {
             <form onSubmit={handleDeleteStores}>
                 <label for="id" class="login-label">Store ID to Delete</label>
                 <input name="id" id="id" type="text" class="login-text" autoFocus value={storeID} onChange={(e) => setID(e.target.value)}></input>
-                <button block size="lg" type="submit" style={ {marginLeft:'10px'} }>Delete</button>
+                <button className='btn btn-danger' block size="lg" type="submit" style={ {marginLeft:'10px'} }>Delete</button>
             </form>
 
             <p>List of all stores</p>

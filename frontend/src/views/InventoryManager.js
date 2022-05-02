@@ -78,11 +78,6 @@ export function InventoryManager() {
         })
 
     }
-
-    function handleEdit(elem) {
-        console.log("Edit clicked");        
-        setName( elem.parentNode.children[1].innerHTML )
-    }
     
     // Deletes product from database
     function handleDeleteProduct(event) {
@@ -100,7 +95,7 @@ export function InventoryManager() {
     // Frontend for Inventory Management
     return (
         <div className="productManagement" style={{marginTop:'56px', marginBottom:'10px'}}>
-            <button size="lg" type="button" style={{marginTop:'15px'}} onClick={handleGetProducts}>Get Products</button><br></br>
+            <button className='btn btn-primary' size="lg" type="button" style={{marginTop:'15px'}} onClick={handleGetProducts}>Get Products</button><br></br>
             <br></br>           
             <p style={{paddingTop:'5px'}}>Add a new product or Update an existing product</p>
             <form onSubmit={handleAddProduct}>
@@ -122,8 +117,8 @@ export function InventoryManager() {
                 <label for="image" class="login-label">Product Image</label>
                 <input name="image" id="image" type="text" class="login-text" autoFocus value={image} onChange={(e) => setImage(e.target.value)}></input><br></br>
                 
-                <button block size="lg" type="submit">Add</button>
-                <button block size="lg" style={ {marginLeft:'10px'} } onClick={handleUpdateProducts}>Update</button>
+                <button  className='btn btn-primary' block size="lg" type="submit">Add</button>
+                <button  className='btn btn-primary' block size="lg" style={ {marginLeft:'10px'} } onClick={handleUpdateProducts}>Update</button>
             </form><br></br>
 
             
@@ -131,7 +126,7 @@ export function InventoryManager() {
             <form onSubmit={handleDeleteProduct}>
                 <label for="productid" class="login-label">Product ID to Delete</label>
                 <input name="productid" id="productid" type="text" class="login-text" autoFocus value={productID} onChange={(e) => setID(e.target.value)}></input>
-                <button block size="lg" type="submit" style={ {marginLeft:'10px'} }>Delete</button>
+                <button className='btn btn-danger' block size="lg" type="submit" style={ {marginLeft:'10px'} }>Delete</button>
             </form>
 
             <p>List of all inventory</p>

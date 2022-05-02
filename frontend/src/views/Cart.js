@@ -41,6 +41,7 @@ export function Cart({cart, setCart}) {
     const updateCart = async (e, amount) => {
         try{
             const user_id = getFromStorage('user_id')
+            
             const options = {
                 method: "PUT",
                 headers: {

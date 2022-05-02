@@ -279,7 +279,8 @@ export function Payment({cart, setCart}) {
                         <InputBox id="city" type="text" title="City" onChange={e => setCity(e.target.value)} value={city} />
                         <InputBox id="state" type="text" title="State" onChange={e => setState(e.target.value)} value={state} />
                     </Row>
-                    <Button onClick={goBack}>Go Back</Button><Button onClick={handleSubmit}>Add</Button>
+                    <Button onClick={goBack}>Go Back</Button>
+                    <Button onClick={handleSubmit}>Add</Button>
                 </div>
             </Column>}
             {display===2 && 
