@@ -23,10 +23,11 @@ export function Login() {
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(data)
         })
-        const user_id = await res.json()
+        const info = await res.json()
         
-        if (user_id.user_id !== -1) {
-            saveToStorage(user_id?.user_id, 'user_id')
+        if (info.user_id !== -1) {
+            saveToStorage(info?.user_id, 'user_id')
+            saveToStorage(info?.firstname, 'firstname')
             nav('/')
         } else {
             alert("Failed to login")

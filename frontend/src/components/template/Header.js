@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { getFromStorage, saveToStorage } from '../../utils/localStorage'
 
 function Header({cart, setCart}) {
 
@@ -37,6 +38,7 @@ function Header({cart, setCart}) {
                 </Link>
               </li>
             </ul>
+            <h5 style={{marginRight: '10px', marginTop: '10px'}}>Howdy, {getFromStorage('firstname')}</h5>
             <a href="/cart">
               <button type="button" className="btn btn-outline-dark me-3 d-none d-lg-inline">
                 <FontAwesomeIcon icon={["fas", "shopping-cart"]} />
