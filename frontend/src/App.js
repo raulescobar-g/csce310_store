@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { Store } from './views/Store'
 import { Login } from './views/Login'
 import { Register } from './views/Register'
 import { Cart } from './views/Cart'
 import { Payment } from './views/Payment'
-import { History } from './views/History'
-import { Account } from './views/Account'
 import Template from "./components/template/Template";
 import Landing from "./components/landing/Landing";
 import ProductDetail from "./components/products/detail/ProductDetail";
@@ -25,8 +22,6 @@ import { getFromStorage, saveToStorage } from './utils/localStorage'
 function App() {
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState({ items: [] })
-  
-  // saveToStorage(null, 'user_id')
 
   useEffect(() => {
     const user_id = getFromStorage('user_id')
@@ -54,13 +49,10 @@ function App() {
           <Route path="/orders/:slug" element={<OrderDetail />} />
           <Route path="/orders" element={<OrderList />} />
           <Route path="/settings" element={<Settings />} />
-          <Route path="/store" element={<Store />} />
           <Route path="/cart" element={<Cart cart={cart} setCart={setCart}/>} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/payment" element={<Payment cart={cart} setCart={setCart}/>} />
-          <Route path="/history" element={<History />} />
-          <Route path="/account" element={<Account />} />
           <Route path="/manageinventory" element={<InventoryManager />} />
           <Route path="/stores" element={<StoreLocations />} />
           <Route path="/managehistory" element={<HistoryManager />} />

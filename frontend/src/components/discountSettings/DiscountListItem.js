@@ -1,3 +1,4 @@
+// Written by David Hung
 import React from 'react';
 
 export default class DiscountListItem extends React.Component {

@@ -1,3 +1,4 @@
+// Written by David Hung
 import Banner from "./Banner";
 import FeatureProduct from "./FeatureProduct";
 import ScrollToTopOnMount from "../template/ScrollToTopOnMount";

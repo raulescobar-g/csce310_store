@@ -1,3 +1,4 @@
+// Written by David Hung
 import React from 'react'
 import DiscountList from './DiscountList'
 import './Discounts.css'

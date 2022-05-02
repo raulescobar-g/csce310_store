@@ -1,8 +1,10 @@
+// Written by David Hung
 import React from "react";
 import ReactDOM from "react-dom";
 import {SettingsPane, SettingsPage, SettingsContent, SettingsMenu} from 'react-settings-pane'
 import "./Settings.css";
 import Discounts from "./discountSettings/Discounts";
+import { getFromStorage} from '../utils/localStorage'
 
 export default class Settings extends React.Component {
     constructor(props) {
@@ -22,8 +24,9 @@ export default class Settings extends React.Component {
         "mysettings.profile.firstname": "Dennis",
         "mysettings.profile.lastname": "Stücken"
       };
+      const user_id = getFromStorage('user_id')
 
-      fetch('http://localhost:5000/users/getuser/1')
+      fetch('http://localhost:5000/users/getuser/' + user_id)
         .then(response => response.json())
         .then(data => {
           this.setState({ 

@@ -1,3 +1,4 @@
+// Written by David Hung
 // import Image from "../nillkin-case-1.jpg";
 import Image from "./no_image.webp";
 import { Link } from "react-router-dom";
