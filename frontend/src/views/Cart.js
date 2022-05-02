@@ -1,14 +1,18 @@
+//Raul Escobar
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { getFromStorage } from '../utils/localStorage'
 
+// styling components
 const CartBox = styled.div`
     padding: 10rem;
 `
+// styling components
 const Col = styled.div`
     width : 20%;
 `
+// styling components
 const Row = styled.div`
     display: flex;
     flex-direction: row;
@@ -18,30 +22,36 @@ const Row = styled.div`
     margin-bottom: 1rem;
     padding: 1rem;
 `
+// styling components
 const Button = styled.button`
     padding:0.3rem;
     background: grey;
 `
-
+// main components that takes in cart, and setCart state managers as props
 export function Cart({cart, setCart}) {
-    const nav = useNavigate()
-    console.log(cart)
 
+    const nav = useNavigate()
+
+    // navigate to payment route
     const navToPay = () => {
         nav("/payment")
     }
+
+    //increments cart in database
     const onPlus = async (e) => {
         await updateCart(e, 1)
     }
 
+    //decrements cart in database
     const onMinus = async (e) => {
         await updateCart(e, -1)
     }
 
+    // sends PUT request to carts endpoint with updated data
     const updateCart = async (e, amount) => {
         try{
             const user_id = getFromStorage('user_id')
-            
+
             const options = {
                 method: "PUT",
                 headers: {
@@ -64,6 +74,7 @@ export function Cart({cart, setCart}) {
         }
     }
 
+    // react render
     return (
         <CartBox>
             <Row>
