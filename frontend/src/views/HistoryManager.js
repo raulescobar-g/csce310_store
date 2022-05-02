@@ -2,7 +2,7 @@
 import React, {useState} from 'react'
 
 export function HistoryManager() {
-    //Dont know if it's order_num or order_number
+
     const [order_num, setOrderNum] = useState("");
     const [user_id, setUserID] = useState("");
     const [product_id, setProductID] = useState("");
