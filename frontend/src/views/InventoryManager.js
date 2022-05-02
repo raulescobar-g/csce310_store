@@ -76,9 +76,10 @@ export function InventoryManager() {
                 
                 var btn = document.createElement("button");
                 btn.className = "btn btn-primary";
+                btn.id = data[i].product_id+"-edit"
                 btn.innerHTML = "Edit";
 
-                btn.addEventListener("click", function() { handleEdit( btn ) });
+                btn.addEventListener("click", function(e) { handleEdit( e.target ) });
 
                 anchor.appendChild( btn )
                 
@@ -88,6 +89,7 @@ export function InventoryManager() {
 
     }
 
+    // Fills input textbox with information from the row where the button was clicked
     function handleEdit( elem ) {
         setName( elem.parentElement.childNodes[1].innerHTML )
         setPrice( elem.parentElement.childNodes[2].innerHTML )

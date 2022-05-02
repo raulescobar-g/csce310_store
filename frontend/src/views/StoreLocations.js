@@ -70,12 +70,29 @@ export function StoreLocations() {
             var list = document.getElementById("listOfStores");
             list.innerHTML = ''
             for (var i in data) {
-                var anchor = document.createElement("li");
-                anchor.innerText = data[i].store_id + ": " + data[i].address + ", " + data[i].city + ", " + data[i].state + " " + data[i].zip;
+                var anchor = document.createElement("tr");
+                anchor.innerHTML = "<td>"+data[i].store_id+"</td><td>"+data[i].address+"</td><td>"+data[i].city+"</td><td>"+data[i].state+"</td><td>"+data[i].zip+"</td>"
+
+                var btn = document.createElement("button");
+                btn.className = "btn btn-primary";
+                btn.innerHTML = "Edit";
+
+                btn.addEventListener("click", function(e) { handleEdit( e.target ) });
+
+                anchor.appendChild( btn )
+
                 list.appendChild(anchor);
             }
         });
 
+    }
+
+    // Fills text input with information from the row where the button was clicked
+    function handleEdit( elem ) {
+        setAddress( elem.parentElement.childNodes[1].innerHTML )
+        setCity( elem.parentElement.childNodes[2].innerHTML )
+        setState( elem.parentElement.childNodes[3].innerHTML )
+        setZip( elem.parentElement.childNodes[4].innerHTML )
     }
     
     // Deletes store from database
@@ -123,8 +140,19 @@ export function StoreLocations() {
             </form>
 
             <p>List of all stores</p>
-            <ul id="listOfStores" style={{listStyle:'none'}}>
-            </ul>
+            <table class="table">
+                <tr>
+                    <th>Store ID</th>
+                    <th>Store Address</th>
+                    <th>Store City</th>
+                    <th>Store State</th>
+                    <th>Store Zip</th>
+                    <th> </th>
+                </tr>
+                <tbody id="listOfStores">
+
+                </tbody>
+            </table>
         </div>
     )
 }
