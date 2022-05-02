@@ -76,6 +76,7 @@ export function StoreLocations() {
                 var btn = document.createElement("button");
                 btn.className = "btn btn-primary";
                 btn.innerHTML = "Edit";
+                btn.style = "padding-top: 5px; padding-bottom: 5px; background-color: #212529;"
 
                 btn.addEventListener("click", function(e) { handleEdit( e.target ) });
 
@@ -93,6 +94,7 @@ export function StoreLocations() {
         setCity( elem.parentElement.childNodes[2].innerHTML )
         setState( elem.parentElement.childNodes[3].innerHTML )
         setZip( elem.parentElement.childNodes[4].innerHTML )
+        setID( elem.parentElement.childNodes[0].innerHTML )
     }
     
     // Deletes store from database
