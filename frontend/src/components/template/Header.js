@@ -69,6 +69,14 @@ function Header({cart, setCart}) {
                     <Link to="/register" className="dropdown-item" onClick={changeNav}>
                       Sign Up
                     </Link>
+                    <Link to="/orders" className="dropdown-item" onclick={changeNav}>
+                      Order History
+                    </Link>
+                    <li>
+                    <Link to="/managehistory" className="dropdown-item" onClick={changeNav}>
+                      Manage History
+                    </Link>
+                    </li>
                   </li>
                   <li>
                     <Link to="/manageinventory" className="dropdown-item" onClick={changeNav}>
