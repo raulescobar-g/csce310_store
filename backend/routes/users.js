@@ -84,7 +84,13 @@ router.post('/trylogin', async(req, res) => {
         const user = await req.app.get('pool').query("SELECT * FROM users WHERE email=$1 AND password=$2", [username, password])
         console.log( user.rows );
 
-        res.send({user_id : user.rows[0].userid})
+        if (user?.rows?.length > 0) {
+            res.send({user_id : user.rows[0].userid})
+        } else {
+            res.send({user_id : -1})
+            return
+        }
+
     } catch (e) {
         console.log(e)
     }

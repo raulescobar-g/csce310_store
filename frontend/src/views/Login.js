@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
-import { saveToStorage } from '../utils/localStorage';
-
+import { getFromStorage, saveToStorage } from '../utils/localStorage';
+import { useNavigate } from 'react-router-dom'
 // Written by Zeeshan V
 export function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    const nav = useNavigate()
     // Checks if email or password fields are empty
     function validateForm() {
         return email.length > 0 && password.length > 0;
@@ -17,15 +17,20 @@ export function Login() {
         
         const data = { username: document.getElementById("username").value,
                         password:  document.getElementById("password").value }
-        alert("Trying" + data.username + data.password);
+        
         const res = await fetch("http://localhost:5000/users/trylogin", {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(data)
         })
         const user_id = await res.json()
-        saveToStorage(user_id.user_id, 'user_id')
         
+        if (user_id.user_id !== -1) {
+            saveToStorage(user_id?.user_id, 'user_id')
+            nav('/')
+        } else {
+            alert("Failed to login")
+        }
     }
 
     // Frontend for Login page
