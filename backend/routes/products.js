@@ -1,7 +1,6 @@
 const express = require("express")
 const router = express.Router()
 // Written by Zeeshan V
-
 // Returns list of products
 router.get('/getproducts', async(req, res) => {
     try {
@@ -16,6 +15,7 @@ router.get('/getproducts', async(req, res) => {
     }
 })
 
+//Written by David Hung
 // Returns 6 products for new arrivals on landing page
 router.get('/getnewproducts', async(req, res) => {
     try {
@@ -30,6 +30,7 @@ router.get('/getnewproducts', async(req, res) => {
     }
 })
 
+//Written by David Hung
 // Returns 4 random products for related products component
 router.get('/getrandomproducts', async(req, res) => {
     try {
@@ -43,7 +44,8 @@ router.get('/getrandomproducts', async(req, res) => {
         console.log(e)
     }
 })
-
+ 
+// Rest of code written by Zeeshan V
 // Updates product in database
 router.post('/updateproduct', async(req, res) => {
     try {

@@ -1,3 +1,5 @@
+// ALL Written by David Hung
+
 const express = require("express")
 const router = express.Router()
 
@@ -6,9 +8,9 @@ const router = express.Router()
 router.post('/', async(req, res) => {
     try {
       const {productid, name, rating, review, date} = req.body
-      console.log(productid, name)
       const newReview = await req.app.get('pool').query("INSERT INTO reviews (productId, name, rating, review, date) VALUES ($1, $2, $3 , $4, $5) RETURNING *", [productid, name, rating, review, date])
       //res.json(newReview)
+      console.log('review created')
     } catch (error) {
       console.log(error)
     }
@@ -19,7 +21,6 @@ router.get('/getreviews/', async(req, res) => {
     try {
         const reviews = await req.app.get('pool').query("SELECT * FROM reviews")
         res.json(reviews.rows)
-        //console.log(users.rows)
     } catch (error) {
         console.log(error)
     }
@@ -36,36 +37,25 @@ router.get('/getreview/:id', async(req, res) => {
     }
 })
   
-// update a users information
-router.put('/updatereview/:id', async(req, res) => {
-    try {
-        const {id} = req.params
-        const {newFirstname, newLastname, newEmail, newPassword} = req.body
-        const updateUser = await req.app.get('pool').query("UPDATE reviews SET firstname = $1, lastname = $2, email = $3, password = $4 WHERE userId= $5", [newFirstname, newLastname, newEmail, newPassword, id])
-        console.log("updated user")
-    } catch (error) {
-        console.log(error)
-    }
-})
-
-// update a users password
+// update review
 router.put('/update/:id', async(req, res) => {
     try {
         const {id} = req.params
-        const {newPassword} = req.body
-        const updateUser = await req.app.get('pool').query("UPDATE users SET password = $1 WHERE userId= $2", [newPassword, id])
-        console.log("updated user")
+        const {productid, name, rating ,review, date} = req.body
+        console.log("updatedsdss")
+        const updateReview = await req.app.get('pool').query("UPDATE reviews SET productid = $1, name = $2, rating = $3, review = $4, date = $5 WHERE reviewId= $6", [productid, name, rating ,review, date, id])
+        console.log("updated review")
     } catch (error) {
         console.log(error)
     }
 })
   
-// delete a user 
+// delete a review
 router.delete('/delete/:id', async(req, res) => {
     try {
         const {id} = req.params
         const deleteReview = await req.app.get('pool').query("DELETE FROM reviews WHERE reviewID = $1", [id])
-        console.log("deleted user")
+        console.log("deleted review")
     } catch (error) {
         console.log(error)
     }

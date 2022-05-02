@@ -1,4 +1,4 @@
-// Written by David Hung
+// All Written by David Hung
 
 const express = require("express")
 const router = express.Router()

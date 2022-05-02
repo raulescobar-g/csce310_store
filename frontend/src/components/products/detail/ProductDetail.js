@@ -23,7 +23,7 @@ function ProductDetail(props) {
   const { slug } = useParams();
 
   useEffect( () => { 
-    fetch('http://localhost:5000/products/getproducts/')
+    fetch('http://localhost:5000/products/getrandomproducts/')
       .then(response => response.json())
       .then(_data => {
         setState2({ items: _data})

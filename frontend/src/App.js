@@ -23,7 +23,7 @@ function App() {
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState({ items: [] })
   
-   // saveToStorage(null, 'user_id')
+  // saveToStorage(null, 'user_id')
 
   useEffect(() => {
     const user_id = getFromStorage('user_id')

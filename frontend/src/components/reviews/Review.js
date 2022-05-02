@@ -1,8 +1,52 @@
 import React, {Component} from 'react';
 
 class Review extends Component {
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+          isEditing: false
+        };
+      }
+
+    deleteReview(){
+        fetch('http://localhost:5000/reviews/delete/' + this.props.review.reviewid,
+        { method: 'DELETE' })
+        .then(response => response.json())
+    }
+
+    onEditClick() {
+        this.setState({isEditing: true});
+    }
+
     render()
     {
+        if (this.state.isEditing) {
+            return (
+                <form onSubmit={this.onSaveClick.bind(this)}>
+
+                    {this.props.validation}
+                    <div className="rating">
+                        <span className="rating__prefix font-size-small">Rating</span>
+                        {this.getStar(1)}
+                        {this.getStar(2)}
+                        {this.getStar(3)}
+                        {this.getStar(4)}
+                        {this.getStar(5)}
+                    </div>
+
+                    <input type="hidden" name="rating" defaultValue={this.props.review.rating} ref="rating"/>
+                    <input type="text" defaultValue={this.props.review.name} name="name" placeholder="Name" ref="name"/>
+
+                    <textarea name="review" defaultValue={this.props.review.review} placeholder="Please enter a review" ref="review"/>
+
+                    <button className="button">
+                        Edit Review
+                    </button>
+                </form>
+            );
+          }
+
         return (
             <li key={this.props.index} className="reviews__list-item reset-list block-padding-vertical">
                 <div className="review area">
@@ -22,8 +66,8 @@ class Review extends Component {
                         {this.props.review.review}
                     </div>
                     <div style={{marginTop: '20px'}}>
-                        <button className='btn btn-primary' style={{marginRight: '20px'}}>Edit</button>
-                        <button className='btn btn-danger'>Delete</button>
+                        <button className='btn btn-primary'  onClick={() => this.onEditClick()} style={{marginRight: '20px'}}>Edit</button>
+                        <button className='btn btn-danger' onClick={() => this.deleteReview()}>Delete</button>
                     </div>
                 </div>
             </li>
@@ -50,6 +94,25 @@ class Review extends Component {
             );
         }
 
+    }
+
+    onSaveClick(event) {
+        event.preventDefault();
+        const name2 = this.refs.name.value;
+        const rating2 = this.refs.rating.value;
+        const review2 = this.refs.review.value;
+        fetch("http://localhost:5000/reviews/update/" + this.props.review.reviewid, {
+            method: 'PUT',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+              productid : this.props.review.productid,
+              name : name2,
+              rating: rating2,
+              review: review2,
+              date: this.props.review.date
+              })
+          })
+          this.setState({isEditing: false});
     }
 }
 
