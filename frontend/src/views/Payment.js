@@ -37,7 +37,8 @@ const Row = styled.div`
 `
 const Button = styled.button`
     padding:0.3rem;
-    background: grey;
+    background: lightgrey;
+    margin-right:0.5rem;
 `
 const Col = styled.div`
     justify-content: space-around;
@@ -278,7 +279,7 @@ export function Payment({cart, setCart}) {
                         <InputBox id="city" type="text" title="City" onChange={e => setCity(e.target.value)} value={city} />
                         <InputBox id="state" type="text" title="State" onChange={e => setState(e.target.value)} value={state} />
                     </Row>
-                    <button onClick={goBack}>Go Back</button><button onClick={handleSubmit}>Add</button>
+                    <Button onClick={goBack}>Go Back</Button><Button onClick={handleSubmit}>Add</Button>
                 </div>
             </Column>}
             {display===2 && 
