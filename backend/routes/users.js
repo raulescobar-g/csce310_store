@@ -1,8 +1,9 @@
+// Written by Zeeshan V and David Hung
 const express = require("express")
 const router = express.Router()
 
 // USER FEATURE //
-// create user (not working)
+// create user 
 router.post('/', async(req, res) => {
     try {
       const {firstName, lastName, email, password, isAdmin} = req.body

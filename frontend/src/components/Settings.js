@@ -1,3 +1,4 @@
+// Written by David Hung
 import React from "react";
 import ReactDOM from "react-dom";
 import {SettingsPane, SettingsPage, SettingsContent, SettingsMenu} from 'react-settings-pane'

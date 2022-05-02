@@ -1,3 +1,4 @@
+// Written by David Hung
 import React from 'react';
 import _ from 'lodash';
 
