@@ -12,6 +12,7 @@ const discountRouter = require('./routes/discounts')
 const cartRouter = require('./routes/carts.js')
 const storeRouter = require('./routes/stores.js')
 const reviewRouter = require('./routes/reviews.js')
+const historyRouter = require('./routes/orders.js')
 
 
 const Pool = require('pg').Pool
@@ -53,6 +54,7 @@ app.use('/discounts', discountRouter);
 app.use('/carts', cartRouter)
 app.use('/stores', storeRouter);
 app.use('/reviews', reviewRouter);
+app.use('/orders',historyRouter);
 
 
 app.listen(5000, () => {
