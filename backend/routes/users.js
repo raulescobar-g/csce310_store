@@ -85,7 +85,7 @@ router.post('/trylogin', async(req, res) => {
         console.log( user.rows );
 
         if (user?.rows?.length > 0) {
-            res.send({user_id : user.rows[0].userid})
+            res.send({user_id : user.rows[0].userid, firstname : user.rows[0].firstname})
         } else {
             res.send({user_id : -1})
             return

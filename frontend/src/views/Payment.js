@@ -133,7 +133,7 @@ export function Payment({cart, setCart}) {
 
     const editPaymentMethod = async (e) => {
 
-        const editPm = paymentMethods.find(pm =>  pm.payment_id == e.target.id)
+        const editPm = paymentMethods.find(pm =>  pm.payment_id === e.target.id)
         setDisplay(2)
         setAddress(editPm.billing_address_one)
         setCardNum(editPm.card_number)
