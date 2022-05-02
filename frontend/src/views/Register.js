@@ -52,7 +52,7 @@ export function Register() {
                 <input name="password" id="password" type="password" class="login-text" autoFocus value={password} onChange={(e) => setPassword(e.target.value)}></input><br></br>
 
                 <button className="btn btn-secondary btn-block" type="submit" disabled={!validateForm()}>
-                Login
+                Sign Up
                 </button>
             </form>
         </div>
