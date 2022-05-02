@@ -105,7 +105,7 @@ export default class Settings extends React.Component {
     }
 
     deleteUser() {
-      fetch('http://localhost:5000/users/delete/',
+      fetch('http://localhost:5000/users/delete/' + this.user_id,
       { method: 'DELETE' })
       .then(response => response.json())
     }
