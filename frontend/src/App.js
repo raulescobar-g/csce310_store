@@ -52,6 +52,7 @@ function App() {
           <Route path="/products" element={<ProductList state={products} setState={setProducts} setCart={setCart} cart={cart}/>} />
           <Route path="/products/:slug" element={<ProductDetail cart={cart} setCart={setCart}/>} />
           <Route path="/orders/:slug" element={<OrderDetail />} />
+          <Route path="/orders" element={<OrderList />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/store" element={<Store />} />
           <Route path="/cart" element={<Cart cart={cart} setCart={setCart}/>} />
