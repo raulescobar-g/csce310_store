@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import List from './List.js';
 import Form from './Form.js';
 import './style.min.css';
-import { useParams } from "react-router-dom";
-
 class ReviewList extends Component {
     constructor(props)
     {
