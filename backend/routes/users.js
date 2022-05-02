@@ -111,7 +111,8 @@ router.post('/tryregister', async(req, res) => {
         const curUsers = await req.app.get('pool').query("SELECT * FROM users WHERE email=$1", [email])
         if ( curUsers.rows.length == 0 ) {
             const newUser = await req.app.get('pool').query("INSERT INTO users (firstname, lastname, email, password, isadmin) VALUES ($1, $2, $3, $4, $5)", [fname, lname, email, password, isAdmin])
-            console.log("Created new user.")
+            res.sendStatus(200)
+            return
         } else {
             console.log("User already exists.")
         }
