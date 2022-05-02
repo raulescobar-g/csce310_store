@@ -36,6 +36,17 @@ router.get('/getdiscount/:id', async(req, res) => {
         console.log(error)
     }
 })
+
+// get a discount
+router.get('/getdiscountbyname/:code', async(req, res) => {
+    try {
+        const {code} = req.params
+        const gotDiscount = await req.app.get('pool').query("SELECT * FROM discountcodes WHERE code=$1", [code])
+        res.json(gotDiscount.rows)
+    } catch (error) {
+        console.log(error)
+    }
+})
   
 // update a discount
 router.put('/update/:id', async(req, res) => {
