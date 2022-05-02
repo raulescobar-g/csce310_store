@@ -71,12 +71,30 @@ export function InventoryManager() {
             var list = document.getElementById("listOfInventory");
             list.innerHTML = ""
             for (var i in data) {
-                var anchor = document.createElement("tr")
+                var anchor = document.createElement("tr");
                 anchor.innerHTML = "<td>"+data[i].product_id+"</td><td>"+data[i].product_name+"</td><td>$"+data[i].product_price+"</td><td>"+data[i].product_brand+"</td><td>"+data[i].manufacturer+"</td><td>"+data[i].product_description+"</td><td>"+data[i].imagelink+"</td>" 
+                
+                var btn = document.createElement("button");
+                btn.className = "btn btn-primary";
+                btn.innerHTML = "Edit";
+
+                btn.addEventListener("click", function() { handleEdit( btn ) });
+
+                anchor.appendChild( btn )
+                
                 list.appendChild(anchor);
             }
         })
 
+    }
+
+    function handleEdit( elem ) {
+        setName( elem.parentElement.childNodes[1].innerHTML )
+        setPrice( elem.parentElement.childNodes[2].innerHTML )
+        setBrand( elem.parentElement.childNodes[3].innerHTML )
+        setManufacturer( elem.parentElement.childNodes[4].innerHTML )
+        setDescription( elem.parentElement.childNodes[5].innerHTML )
+        setImage( elem.parentElement.childNodes[6].innerHTML )
     }
     
     // Deletes product from database
